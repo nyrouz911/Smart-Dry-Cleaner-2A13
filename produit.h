@@ -11,18 +11,18 @@
 class produit
 {
 private:
-    QString fournisseur,type_machine;
+    QString fournisseur,type_machine,image;
         int id_produit , quantite,prix_unitaire ;
 
 public:
     produit();
-    produit(int id_produit,QString fournisseur,int quantite ,int prix_unitaire,QString type_machine){
+    produit(int id_produit,QString fournisseur,int quantite ,int prix_unitaire,QString type_machine,QString image){
         this->id_produit = id_produit ;
         this->quantite = quantite;
         this->fournisseur=fournisseur;
         this->prix_unitaire=prix_unitaire;
         this->type_machine=type_machine;
-
+        this->image=image;
 
     }
     void setid_produit(int id_produit){this->id_produit=id_produit;}
@@ -38,10 +38,17 @@ public:
 
 
     bool ajouter();
-    bool modifier(int id_produit,QString fournisseur,int quantite ,int prix_unitaire,QString type_machine);
+    bool modifier(int id_produit/*,QString fournisseur,int quantite ,int prix_unitaire,QString type_machine*/);
     bool supprimer(int id_produit);
-
+    QSqlQueryModel * recherche(QString id_produit);
+    QSqlQueryModel * recherchefournisseur(QString fournisseur);
+    QSqlQueryModel * recherchequantite(QString fournisseur);
+    QSqlQueryModel * rechercheprix(QString prix_unitaire);
+    QSqlQueryModel * recherchetype(QString type_machine);
     QSqlQueryModel * afficher();
+    //QSqlQueryModel*  tri(QString id_produit);
+    QSqlQueryModel * tri(QString type_machine);
+    QSqlQueryModel * AfficherTriprix();
 };
 
 #endif
