@@ -2,7 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "commandes.h"
+#include "employee.h"
+#include "messengerconnection.h"
+
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -17,24 +20,41 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_pushButton_3_clicked();
 
-    void on_pushButton_5_clicked();
-
-    void on_tableView_activated(const QModelIndex &index);
-
-    void on_tableView_doubleClicked(const QModelIndex &index);
 
     void on_pushButton_clicked();
 
-    void on_Boutton_Afiche_Commades_clicked();
+    void on_pushButton_2_clicked();
 
-    void on_Boutton_aller_a_ajouterCommande_clicked();
+    void on_pushButton_3_clicked();
 
-    void on_comboBox_4_activated(int index);
+    void on_pushButton_4_clicked();
+
+    void on_rechPB_activated(const QString &arg1);
+
+    void on_pushButton_5_clicked();
+
+    void on_comboRech_activated(const QString &arg1);
+    void on_comboBox_currentTextChanged(const QString &arg1);
+
+
+
+    void on_pushButton_6_clicked();
+
+    void on_pushButton_7_clicked();
+
+    void on_pushButton_8_clicked();
+
+    void on_comboBox_activated(const QString &arg1);
+
+    void on_pushButton_9_clicked();
+
+    void on_pushButton_10_clicked();
+
+    void on_send_clicked();
 
 private:
     Ui::MainWindow *ui;
-    Commandes Etmp;
+    Employee e;
 };
 #endif // MAINWINDOW_H

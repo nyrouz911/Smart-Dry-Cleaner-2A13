@@ -1,171 +1,205 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "commandes.h"
+#include "employee.h"
 #include <QMessageBox>
+#include "QMessageBox"
+#include <QApplication>
+#include <QIntValidator>
+#include <QStackedWidget>
+#include <QDateEdit>
+#include<QSqlQuery>
+#include <QComboBox>
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+    //afficher
     ui->setupUi(this);
-    ui->tableView->setModel(Etmp.afficherCommande());
-
+    ui->tableView->setModel(e.afficher());
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
-/*
-void MainWindow::on_checkBox_clicked()
+
+
+void MainWindow::on_pushButton_clicked()
 {
+    //ajouter
+    QString nom=ui->nom->text();
+    QString prenom=ui->prenom->text();
+    int salaire=ui->salaire->text().toFloat();
+    QString role=ui->role->text();
 
-}
+    Employee e(nom,prenom,salaire,role);
 
-*/
-void MainWindow::on_pushButton_3_clicked()//click sur le boutton ajouter
-{
-    int nbPieces= ui->spinBox->text().toInt();
-    float montant= ui->lineEdit_7->text().toInt();
-
-    bool livrable=false;
-    if(ui->checkBox->isChecked())
-       livrable=true;
-    else if(ui->checkBox_2->isChecked())
-        livrable=false;
-
-    bool paye=false;
-    if(ui->checkBox_5->isChecked())
-        paye=true;
-    else if(ui->checkBox_6->isChecked())
-        paye=false;
-
-    Commandes nouvelleCommande(nbPieces,2,livrable,montant);
-    bool confirmationAjout = nouvelleCommande.ajouterCommande();
-
-    if(confirmationAjout)
-    {
-        ui->tableView->setModel(Etmp.afficherCommande());
-        QMessageBox::information(nullptr,QObject::tr("OK"),
-                                 QObject::tr("AJOUT EFFECTUE\n"
-                                             "Click Cancel to exit."), QMessageBox::Cancel);
-    }
-    else
-        QMessageBox::critical(nullptr, QObject::tr("Not OK"),
-                              QObject::tr("Ajout non effectue.\n"
-                                          "Click Cancel to exit."), QMessageBox::Cancel);
-}
-
-/*
-void MainWindow::on_checkBox_stateChanged(int arg1)
-{
-
-}
-*/
-
-void MainWindow::on_pushButton_5_clicked()//appuie sur le boutton supprimer
-{
-    QModelIndex index= ui->tableView->currentIndex();
-    int data= ui->tableView->model()->data(index).toInt();
-    bool confirmationSuppression=Etmp.supprimerCommande(data);
-
-    if(confirmationSuppression)
-    {
-        ui->tableView->setModel(Etmp.afficherCommande());
-        QMessageBox::information(nullptr,QObject::tr("OK"),
-                                 QObject::tr("SUPPRESSION EFFECTUE\n"
-                                             "Click Cancel to exit."), QMessageBox::Cancel);
-    }
-    else
-        QMessageBox::critical(nullptr, QObject::tr("Not OK"),
-                              QObject::tr("SUPPRESSION non effectue.\n"
-                                          "Click Cancel to exit."), QMessageBox::Cancel);
-}
-
-void MainWindow::on_tableView_activated(const QModelIndex &index)
-{
-
-}
-
-void MainWindow::on_tableView_doubleClicked(const QModelIndex &index)//lorque double click sur l'index d'une commande dans le tableau
-{
-    QString idcommande= ui->tableView->model()->data(index).toString();
-    QSqlQuery query;
-    query.prepare("Select montant,nbpieces,livrable,statut,date_retrait from commandes where  idcommande='"+idcommande+"'");
-    if(query.exec())
-    {
-        //remplissage des champs avec les donnees de la commande selectionne
-        while(query.next())
+        bool test=e.ajouter();
+        if(test)
         {
-            ui->lineEdit_6->setText(idcommande);
-            ui->lineEdit_3->setText(query.value(0).toString());
-            ui->lineEdit_5->setText(query.value(1).toString());
-
-            if(query.value(2).toString()=="Oui")
-                ui->comboBox_2->setCurrentIndex(1);
-            else if(query.value(2).toString()=="Non")
-                ui->comboBox_2->setCurrentIndex(2);
-            else
-                ui->comboBox_2->setCurrentIndex(0);
-
-            if(query.value(3).toString()=="Paye")
-                ui->comboBox_3->setCurrentIndex(1);
-            else if(query.value(3).toString()=="Non-Paye")
-                ui->comboBox_3->setCurrentIndex(2);
-            else
-                ui->comboBox_3->setCurrentIndex(0);
-
-            ui->dateEdit_2->setDate(query.value(4).toDate());
+            QMessageBox::information(nullptr, QObject::tr("ok"),
+                                     QObject::tr("ajoute \n"
+                                                 "click to cancel"), QMessageBox::Cancel);
         }
-    }
+        else
+            QMessageBox::critical(nullptr, QObject::tr("not ok") , QObject::tr("non effecute"),QMessageBox::Cancel);
+
 }
 
-void MainWindow::on_pushButton_clicked()//appuie sur le boutton modifier
+void MainWindow::on_pushButton_2_clicked()
 {
-    float montant=ui->lineEdit_3->text().toFloat();
-    int nbPieces=ui->lineEdit_5->text().toUInt();
-    int idEmploye=ui->comboBox_4->currentText().toInt();
-    QString livrable=ui->spinBox->text();
-    //QDate dateDepot=ui->dateEdit->date();
-    QDate dateRetrait=ui->dateEdit_2->date();
-    QString statut=ui->comboBox_3->currentText();
-    int idCommande=ui->lineEdit_6->text().toInt();
-    bool confirmationModification=Etmp.modifierCommande(nbPieces,idEmploye,livrable,montant,dateRetrait,statut,idCommande);
-
-    ui->lineEdit_6->setReadOnly(true);//on met de la commande en mode lecture uniquement
-
-    if(confirmationModification)
+    //supprimer
+    int id=ui->lineEdit_5->text().toUInt();
+    bool test=e.supprimer(id);
+    if(test)
     {
-        ui->tableView->setModel(Etmp.afficherCommande());
-        QMessageBox::information(nullptr,QObject::tr("OK"),
-                                 QObject::tr("MODIFICATION EFFECTUE\n"
-                                             "Click Cancel to exit."), QMessageBox::Cancel);
+        QMessageBox::information(nullptr, QObject::tr("ok"),
+                                 QObject::tr("supprimé \n"
+                                             "click to cancel"), QMessageBox::Cancel);
     }
     else
-        QMessageBox::critical(nullptr, QObject::tr("Not OK"),
-                              QObject::tr("MODIFICATION non effectue.\n"
-                                          "Click Cancel to exit."), QMessageBox::Cancel);
+        QMessageBox::critical(nullptr, QObject::tr("not ok") , QObject::tr("non effecute"),QMessageBox::Cancel);
+
 }
 
-void MainWindow::on_Boutton_Afiche_Commades_clicked()//Boutton Afficher Commandes pour se deplacer dans la partie afficher Commandes
+void MainWindow::on_pushButton_3_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(1);
-}
-
-void MainWindow::on_Boutton_aller_a_ajouterCommande_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(0);
-}
-
-void MainWindow::on_comboBox_4_activated(int index)
-{
-    QSqlQuery query;
-    query.prepare("select id_emp from Employes");
-    if(query.exec())
+    //modifier
+    int id=ui->lineEdit_6->text().toUInt();
+    QString nom=ui->lineEdit_7->text();
+    QString prenom=ui->lineEdit_8->text();
+    int salaire=ui->lineEdit_9->text().toFloat();
+    QString role=ui->lineEdit_10->text();
+    bool test=e.modifier(id,nom,prenom,salaire,role);
+    if(test)
     {
-        while(query.next())
-        {
-            ui->comboBox_4->addItem(query.value(0).toString());
-        }
+        QMessageBox::information(nullptr, QObject::tr("ok"),
+                                 QObject::tr("modifié \n"
+                                             "click to cancel"), QMessageBox::Cancel);
     }
+    else
+        QMessageBox::critical(nullptr, QObject::tr("not ok") , QObject::tr("non effecute"),QMessageBox::Cancel);
+
+
 }
+
+void MainWindow::on_pushButton_4_clicked()
+//afficher2.0
+{
+    ui->tableView->setModel(e.afficher());
+}
+
+void MainWindow::on_pushButton_5_clicked()
+{
+    QMessageBox msgBox;
+
+        QSqlQuery query;
+        QString nom="",prenom="",role="";
+        int critere=ui->comboBox->currentIndex();
+
+        if(critere==2)
+        {
+             role=ui->lineEdit->text();
+
+             ui->tableView->setModel(e.RechercheByRole(role));
+
+             query.bindValue(":role", role);
+             query.exec();
+        }
+           else if(critere==0)
+           {
+               nom=ui->lineEdit->text();
+               ui->tableView->setModel(e.RechercheByNom(nom));
+               query.bindValue(":nom", nom);
+               query.exec();
+
+           }
+           else if(critere==1)
+           {
+               prenom=ui->lineEdit->text();
+               ui->tableView->setModel(e.RechercheByPrenom(prenom));
+               query.bindValue(":prenom", prenom);
+               query.exec();
+           }
+}
+
+void MainWindow::on_pushButton_6_clicked()
+{
+    ui->tableView->setModel(e.tri());
+}
+
+
+void MainWindow::on_pushButton_7_clicked()
+{
+    ui->tableView->setModel(e.tri1());
+}
+
+void MainWindow::on_pushButton_8_clicked()
+{
+    ui->tableView->setModel(e.tri2());
+}
+
+void MainWindow::on_comboBox_activated(const QString &arg1)
+{
+
+}
+
+void MainWindow::on_pushButton_9_clicked() // français
+{
+    ui->label_2->setText("Nom");
+    ui->label_3->setText("Prénom");
+    ui->label_4->setText("Salaire");
+    ui->label_5->setText("Role");
+    ui->label_8->setText("Nom");
+    ui->label_9->setText("Prénom");
+    ui->label_10->setText("Salaire");
+    ui->label_11->setText("Role");
+
+    ui->pushButton_5->setText("chercher");
+    ui->send->setText("envoyer");
+    ui->bind->setText("connect");
+    ui->pushButton_9->setText("Français");
+    ui->pushButton_10->setText("Anglais");
+    ui->pushButton_7->setText("tri nom");
+    ui->pushButton_8->setText("tri prenom");
+    ui->pushButton_6->setText("tri salaire");
+    ui->pushButton_4->setText("Actualiser");
+    ui->label_14->setText("message");
+}
+
+void MainWindow::on_pushButton_10_clicked() // anglais
+{
+       ui->label_2->setText("Name");
+       ui->label_3->setText("Surname");
+       ui->label_4->setText("Salary");
+       ui->label_5->setText("Role");
+       ui->label_8->setText("Name");
+       ui->label_9->setText("Surname");
+       ui->label_10->setText("Salary");
+       ui->label_11->setText("Role");
+
+       ui->pushButton_5->setText("Reseach");
+       ui->send->setText("send");
+       ui->bind->setText("connect");
+       ui->pushButton_9->setText("French");
+       ui->pushButton_10->setText("English");
+       ui->pushButton_7->setText("Sorte by Name");
+       ui->pushButton_8->setText("Sorte by Surname");
+       ui->pushButton_6->setText("Sorte by Salary");
+       ui->pushButton_4->setText("Update");
+       ui->label_14->setText("message");
+
+
+
+
+}
+
+/*void MainWindow::on_send_clicked()
+{
+    QTextStream T(mSocket);
+    T<<ui->name->text()<<" : "<<ui->message->text();
+    mSocket->flush();
+    ui->message->clear();
+}*/
