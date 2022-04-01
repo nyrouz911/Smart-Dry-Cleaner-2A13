@@ -200,23 +200,10 @@
           <string>Supprimer</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="pushButton_4">
-         <property name="geometry">
-          <rect>
-           <x>300</x>
-           <y>370</y>
-           <width>75</width>
-           <height>23</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>trier</string>
-         </property>
-        </widget>
         <widget class="QPushButton" name="pushButton_5">
          <property name="geometry">
           <rect>
-           <x>380</x>
+           <x>310</x>
            <y>370</y>
            <width>75</width>
            <height>23</height>
@@ -224,32 +211,6 @@
          </property>
          <property name="text">
           <string>statistique</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="pushButton_6">
-         <property name="geometry">
-          <rect>
-           <x>530</x>
-           <y>410</y>
-           <width>75</width>
-           <height>23</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Français</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="pushButton_7">
-         <property name="geometry">
-          <rect>
-           <x>610</x>
-           <y>410</y>
-           <width>75</width>
-           <height>23</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Anglais</string>
          </property>
         </widget>
         <widget class="QLabel" name="label_6">
@@ -288,6 +249,45 @@
           <string>inserer image</string>
          </property>
         </widget>
+        <widget class="QPushButton" name="pushButton_6">
+         <property name="geometry">
+          <rect>
+           <x>470</x>
+           <y>400</y>
+           <width>111</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>trier par quantité</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="pushButton_7">
+         <property name="geometry">
+          <rect>
+           <x>590</x>
+           <y>400</y>
+           <width>80</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>trier par ID </string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="pushButton_4">
+         <property name="geometry">
+          <rect>
+           <x>380</x>
+           <y>400</y>
+           <width>80</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>trier par prix</string>
+         </property>
+        </widget>
        </widget>
       </widget>
      </widget>
@@ -300,7 +300,7 @@
      <x>0</x>
      <y>0</y>
      <width>896</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

@@ -46,9 +46,10 @@ public:
     QSqlQueryModel * rechercheprix(QString prix_unitaire);
     QSqlQueryModel * recherchetype(QString type_machine);
     QSqlQueryModel * afficher();
-    //QSqlQueryModel*  tri(QString id_produit);
-    QSqlQueryModel * tri(QString type_machine);
+
     QSqlQueryModel * AfficherTriprix();
+     QSqlQueryModel * AfficherTriquantite();
+    QSqlQueryModel * AfficherTriID() ;
 };
 
 #endif

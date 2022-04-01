@@ -176,13 +176,7 @@ void MainWindow::on_lineEdit_5_textChanged(const QString &arg1)
     ui->tableView->setModel(tmpproduit.recherchetype(arg1));
 }
 
-void MainWindow::on_pushButton_4_clicked()
-{
 
-
-        ui->tableView->setModel(tmpproduit.AfficherTriprix());
-
-         }
 
 
 
@@ -225,46 +219,8 @@ void MainWindow::on_pushButton_5_clicked()
         chartView->show();
 }
 
-void MainWindow::on_pushButton_6_clicked()
-{
-    ui->label->setText("ID_produit");
-    ui->label_2->setText("fournisseur");
-    ui->label_3->setText("quantite");
-    ui->label_4->setText("prix unitaire");
-    ui->label_5->setText("type_machine");
-    ui->label_6->setText("image");
-    ui->pushButton->setText("Ajouter");
-    ui->pushButton_2->setText("Modifer");
-    ui->pushButton_3->setText("Supprimer");
-    ui->pushButton_6->setText("Français");
-    ui->pushButton_7->setText("Anglais");
-    ui->pushButton_4->setText("Trier");
-    ui->pushButton_5->setText("statistique");
 
-
-
-
-
-}
-
-void MainWindow::on_pushButton_7_clicked()
-{
-    ui->label->setText("Id");
-    ui->label_2->setText("supplier");
-    ui->label_3->setText("quantity");
-    ui->label_4->setText("unit price");
-    ui->label_5->setText("machine type");
-    ui->pushButton->setText("Add");
-    ui->pushButton_2->setText("Modify");
-    ui->pushButton_3->setText("Remove");
-    ui->pushButton_6->setText("French");
-    ui->pushButton_7->setText("English");
-    ui->pushButton_4->setText("Sort");
-    ui->pushButton_5->setText("statistics");
-
-
-}
-/* void MainWindow::on_pushButton_61_clicked()
+/* void MainWindow::on_pushButton_61_clicked()+
 {
     QFileDialog dialog(this);
     dialog.setNameFilter(tr("Images (*.png *.xpm *.jpg)"));
@@ -287,3 +243,20 @@ void MainWindow::on_pushButton_8_clicked()
         ui->lineEdit_6->insert(file_name);
 
 }
+
+void MainWindow::on_pushButton_6_clicked()
+{
+     ui->tableView->setModel(tmpproduit.AfficherTriquantite());
+}
+
+void MainWindow::on_pushButton_7_clicked()
+{
+  ui->tableView->setModel(tmpproduit.AfficherTriID());
+}
+void MainWindow::on_pushButton_4_clicked()
+{
+
+
+        ui->tableView->setModel(tmpproduit.AfficherTriprix());
+
+         }

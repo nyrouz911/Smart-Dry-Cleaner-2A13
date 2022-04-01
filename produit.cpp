@@ -184,10 +184,11 @@ QSqlQueryModel * produit ::recherchetype(QString type_machine)
             return model;
   }*/
 
-QSqlQueryModel * produit::AfficherTriprix()
+
+QSqlQueryModel * produit::AfficherTriquantite()
 {
     QSqlQueryModel * model = new QSqlQueryModel();
-    model->setQuery("SELECT * FROM PRODUITS ORDER BY PRIX_UNIT DESC");
+    model->setQuery("SELECT * FROM PRODUITS ORDER BY QTE ASC");
     model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID_PROD"));
     model->setHeaderData(1, Qt::Horizontal, QObject::tr("FOURNISS"));
     model->setHeaderData(2, Qt::Horizontal, QObject::tr("QTE"));
@@ -198,3 +199,29 @@ QSqlQueryModel * produit::AfficherTriprix()
     return model;
 }
 
+QSqlQueryModel * produit::AfficherTriID()
+{
+    QSqlQueryModel * model = new QSqlQueryModel();
+    model->setQuery("SELECT * FROM PRODUITS ORDER BY ID_PROD ASC");
+    model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID_PROD"));
+    model->setHeaderData(1, Qt::Horizontal, QObject::tr("FOURNISS"));
+    model->setHeaderData(2, Qt::Horizontal, QObject::tr("QTE"));
+    model->setHeaderData(3, Qt::Horizontal, QObject::tr("PRIX_UNIT"));
+    model->setHeaderData(4, Qt::Horizontal, QObject::tr("TYPE_MACHINE"));
+    model->setHeaderData(5, Qt::Horizontal, QObject::tr("IMAGE"));
+
+    return model;
+}
+QSqlQueryModel * produit::AfficherTriprix()
+{
+    QSqlQueryModel * model = new QSqlQueryModel();
+    model->setQuery("SELECT * FROM PRODUITS ORDER BY PRIX_UNIT ");
+    model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID_PROD"));
+    model->setHeaderData(1, Qt::Horizontal, QObject::tr("FOURNISS"));
+    model->setHeaderData(2, Qt::Horizontal, QObject::tr("QTE"));
+    model->setHeaderData(3, Qt::Horizontal, QObject::tr("PRIX_UNIT"));
+    model->setHeaderData(4, Qt::Horizontal, QObject::tr("TYPE_MACHINE"));
+    model->setHeaderData(5, Qt::Horizontal, QObject::tr("IMAGE"));
+
+    return model;
+}
