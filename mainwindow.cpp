@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "commandes.h"
 #include <QMessageBox>
+#include <string>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -9,6 +10,10 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     ui->tableView->setModel(Etmp.afficherCommande());
+    ui->comboBox->setModel(Etmp.remplirComboBoxClient());//remplir la comboBox Client sur la page ajouter
+    ui->comboBox_5->setModel(Etmp.remplirComboBoxEmploye());//remplir la comboBox Employe sur la page ajouter
+    ui->comboBox_4->setModel(Etmp.remplirComboBoxEmploye());//remplir la comboBox Employe sur la page Modifier
+    ui->comboBox_6->setModel(Etmp.remplirComboBoxEmploye());//remplir la comboBox Client sur la page Modifier
 
 }
 
@@ -25,8 +30,39 @@ void MainWindow::on_checkBox_clicked()
 */
 void MainWindow::on_pushButton_3_clicked()//click sur le boutton ajouter
 {
+    bool IdEmploye_ok=true;
+    bool IdClient_ok=true;
+    bool nbPieces_ok=true;
+    bool montant_ok=true;
+    bool livrable_ok=true;
+    bool paye_ok=true;
+
+    ui->label_8->setText("");//Id Client
+    ui->label_22->setText("");//Id Employe
+    ui->label_23->setText("");//Nombre de pieces
+    ui->label_26->setText("");//Montant
+    ui->label_24->setText("");//parametre de livraison
+    ui->label_25->setText("");//paye
+
+    if(ui->comboBox->currentText().length()<=0)
+        ui->label_8->setText("Id Client Invalide");
+    else if(ui->comboBox_5->currentText().length()<=0)
+        ui->label_22->setText("Id Employe Invalide");
+    else if(ui->spinBox->text().toInt()==0)
+        ui->label_23->setText("Nombre de pieces Invalide");
+    else if(ui->lineEdit_7->text().toInt()<=0)
+        ui->label_26->setText("Montant Invalide");
+    else if((ui->checkBox->isChecked() && ui->checkBox_2->isChecked()) || (!ui->checkBox->isChecked() && !ui->checkBox_2->isChecked()))
+        ui->label_24->setText("parametre de livraison Invalide");
+    else if((ui->checkBox_5->isChecked() && ui->checkBox_6->isChecked()) || (!ui->checkBox_5->isChecked() && !ui->checkBox_6->isChecked()))
+        ui->label_25->setText("Invalide");
+    else
+    {
+
     int nbPieces= ui->spinBox->text().toInt();
     float montant= ui->lineEdit_7->text().toInt();
+    int IdEmploye=ui->comboBox_5->currentText().toInt();
+    int IdClient=ui->comboBox->currentText().toInt();
 
     bool livrable=false;
     if(ui->checkBox->isChecked())
@@ -40,8 +76,9 @@ void MainWindow::on_pushButton_3_clicked()//click sur le boutton ajouter
     else if(ui->checkBox_6->isChecked())
         paye=false;
 
-    Commandes nouvelleCommande(nbPieces,2,livrable,montant);
+    Commandes nouvelleCommande(nbPieces,IdClient,livrable,montant,IdEmploye);
     bool confirmationAjout = nouvelleCommande.ajouterCommande();
+
 
     if(confirmationAjout)
     {
@@ -54,6 +91,7 @@ void MainWindow::on_pushButton_3_clicked()//click sur le boutton ajouter
         QMessageBox::critical(nullptr, QObject::tr("Not OK"),
                               QObject::tr("Ajout non effectue.\n"
                                           "Click Cancel to exit."), QMessageBox::Cancel);
+    }
 }
 
 /*
@@ -91,7 +129,7 @@ void MainWindow::on_tableView_doubleClicked(const QModelIndex &index)//lorque do
 {
     QString idcommande= ui->tableView->model()->data(index).toString();
     QSqlQuery query;
-    query.prepare("Select montant,nbpieces,livrable,statut,date_retrait from commandes where  idcommande='"+idcommande+"'");
+    query.prepare("Select montant,nbpieces,livrable,statut,date_retrait,idEmploye,idClient from commandes where  idcommande='"+idcommande+"'");
     if(query.exec())
     {
         //remplissage des champs avec les donnees de la commande selectionne
@@ -115,7 +153,10 @@ void MainWindow::on_tableView_doubleClicked(const QModelIndex &index)//lorque do
             else
                 ui->comboBox_3->setCurrentIndex(0);
 
-            ui->dateEdit_2->setDate(query.value(4).toDate());
+            //ui->dateEdit_2->setDate(query.value(4).toDate());
+            ui->dateEdit_2->setDateTime(query.value(4).toDateTime());
+            ui->comboBox_4->setCurrentText(query.value(5).toString());
+            ui->comboBox_6->setCurrentText(query.value(6).toString());
         }
     }
 }
@@ -125,12 +166,13 @@ void MainWindow::on_pushButton_clicked()//appuie sur le boutton modifier
     float montant=ui->lineEdit_3->text().toFloat();
     int nbPieces=ui->lineEdit_5->text().toUInt();
     int idEmploye=ui->comboBox_4->currentText().toInt();
-    QString livrable=ui->spinBox->text();
+    QString livrable=ui->comboBox_2->currentText();
     //QDate dateDepot=ui->dateEdit->date();
     QDate dateRetrait=ui->dateEdit_2->date();
     QString statut=ui->comboBox_3->currentText();
     int idCommande=ui->lineEdit_6->text().toInt();
-    bool confirmationModification=Etmp.modifierCommande(nbPieces,idEmploye,livrable,montant,dateRetrait,statut,idCommande);
+    int idClient=ui->comboBox_6->currentText().toInt();
+    bool confirmationModification=Etmp.modifierCommande(nbPieces,idEmploye,livrable,montant,dateRetrait,statut,idCommande,idClient);
 
     ui->lineEdit_6->setReadOnly(true);//on met de la commande en mode lecture uniquement
 
@@ -154,6 +196,11 @@ void MainWindow::on_Boutton_Afiche_Commades_clicked()//Boutton Afficher Commande
 
 void MainWindow::on_Boutton_aller_a_ajouterCommande_clicked()
 {
+    ui->comboBox->setModel(Etmp.remplirComboBoxClient());//remplir la comboBox Client sur la page ajouter
+    ui->comboBox_5->setModel(Etmp.remplirComboBoxEmploye());//remplir la comboBox Employe sur la page ajouter
+    ui->comboBox_4->setModel(Etmp.remplirComboBoxEmploye());//remplir la comboBox Employe sur la page Modifier
+    ui->comboBox_6->setModel(Etmp.remplirComboBoxEmploye());//remplir la comboBox Client sur la page Modifier
+
     ui->stackedWidget->setCurrentIndex(0);
 }
 
@@ -166,6 +213,279 @@ void MainWindow::on_comboBox_4_activated(int index)
         while(query.next())
         {
             ui->comboBox_4->addItem(query.value(0).toString());
+        }
+    }
+}
+
+void MainWindow::on_tableWidget_2_cellChanged(int row, int column)
+{
+    //calcule des prix
+    float montantCouette=ui->tableWidget_2->item(1,0)->text().toFloat() * ui->tableWidget_2->item(1,1)->text().toFloat();
+    float montantDrap=ui->tableWidget_2->item(2,0)->text().toFloat() * ui->tableWidget_2->item(2,1)->text().toFloat();
+    float montantVeste=ui->tableWidget_2->item(3,0)->text().toFloat() * ui->tableWidget_2->item(3,1)->text().toFloat();
+    float montantPantalon=ui->tableWidget_2->item(4,0)->text().toFloat() * ui->tableWidget_2->item(4,1)->text().toFloat();
+    float montantRobe=ui->tableWidget_2->item(5,0)->text().toFloat() * ui->tableWidget_2->item(5,1)->text().toFloat();
+    float montantCostume=ui->tableWidget_2->item(6,0)->text().toFloat() * ui->tableWidget_2->item(6,1)->text().toFloat();
+    float montantChaussure=ui->tableWidget_2->item(7,0)->text().toFloat() * ui->tableWidget_2->item(7,1)->text().toFloat();
+
+    //ui->tableWidget_2->item(row,column+2)->setText("ca marche");
+    //ui->lineEdit_7->setText(QString::number(montantCouette));
+
+    //affectation des prix
+   /* QTableWidgetItem *item;
+    item->setText(QString::number(montantCouette));
+    ui->tableWidget_2->setItem(1,2,item);*/
+}
+/*
+void MainWindow::on_tableWidget_2_itemChanged(QTableWidgetItem *item)
+{
+
+}
+*/
+
+void MainWindow::on_checkBox_8_stateChanged(int arg1)//etat du checkbox montant croissant change
+{
+    bool montantCroissant=ui->checkBox_8->isChecked();
+    bool montantDecroissant=ui->checkBox_9->isChecked();
+    bool dateDepotCroissant=ui->checkBox_10->isChecked();
+    bool dateDepotDecroissant=ui->checkBox_11->isChecked();
+    bool dateRetraitCroissant=ui->checkBox_12->isChecked();
+    bool dateRetraitDecroissant=ui->checkBox_13->isChecked();
+    bool nbPiecesCroissant=ui->checkBox_14->isChecked();
+    bool nbPiecesDecroissant=ui->checkBox_15->isChecked();
+
+    if(montantCroissant && !montantDecroissant && !dateDepotCroissant && !dateDepotDecroissant && !dateRetraitCroissant && !dateRetraitDecroissant && !nbPiecesCroissant && !nbPiecesDecroissant)
+        ui->tableView->setModel(Etmp.TrierCommande("montantCroissant"));
+    else
+        ui->tableView->setModel(Etmp.afficherCommande());
+}
+
+void MainWindow::on_checkBox_9_stateChanged(int arg1)//etat du checkbox montant decroissant change
+{
+    bool montantCroissant=ui->checkBox_8->isChecked();
+    bool montantDecroissant=ui->checkBox_9->isChecked();
+    bool dateDepotCroissant=ui->checkBox_10->isChecked();
+    bool dateDepotDecroissant=ui->checkBox_11->isChecked();
+    bool dateRetraitCroissant=ui->checkBox_12->isChecked();
+    bool dateRetraitDecroissant=ui->checkBox_13->isChecked();
+    bool nbPiecesCroissant=ui->checkBox_14->isChecked();
+    bool nbPiecesDecroissant=ui->checkBox_15->isChecked();
+
+    if(!montantCroissant && montantDecroissant && !dateDepotCroissant && !dateDepotDecroissant && !dateRetraitCroissant && !dateRetraitDecroissant && !nbPiecesCroissant && !nbPiecesDecroissant)
+        ui->tableView->setModel(Etmp.TrierCommande("montantDecroissant"));
+    else
+        ui->tableView->setModel(Etmp.afficherCommande());
+}
+
+void MainWindow::on_checkBox_10_stateChanged(int arg1)//etat du checkbox datedepot croissant change
+{
+    bool montantCroissant=ui->checkBox_8->isChecked();
+    bool montantDecroissant=ui->checkBox_9->isChecked();
+    bool dateDepotCroissant=ui->checkBox_10->isChecked();
+    bool dateDepotDecroissant=ui->checkBox_11->isChecked();
+    bool dateRetraitCroissant=ui->checkBox_12->isChecked();
+    bool dateRetraitDecroissant=ui->checkBox_13->isChecked();
+    bool nbPiecesCroissant=ui->checkBox_14->isChecked();
+    bool nbPiecesDecroissant=ui->checkBox_15->isChecked();
+
+    if(!montantCroissant && !montantDecroissant && dateDepotCroissant && !dateDepotDecroissant && !dateRetraitCroissant && !dateRetraitDecroissant && !nbPiecesCroissant && !nbPiecesDecroissant)
+        ui->tableView->setModel(Etmp.TrierCommande("dateDepotCroissant"));
+    else
+        ui->tableView->setModel(Etmp.afficherCommande());
+}
+
+void MainWindow::on_checkBox_11_stateChanged(int arg1)//etat du checkbox datedepot decroissant change
+{
+    bool montantCroissant=ui->checkBox_8->isChecked();
+    bool montantDecroissant=ui->checkBox_9->isChecked();
+    bool dateDepotCroissant=ui->checkBox_10->isChecked();
+    bool dateDepotDecroissant=ui->checkBox_11->isChecked();
+    bool dateRetraitCroissant=ui->checkBox_12->isChecked();
+    bool dateRetraitDecroissant=ui->checkBox_13->isChecked();
+    bool nbPiecesCroissant=ui->checkBox_14->isChecked();
+    bool nbPiecesDecroissant=ui->checkBox_15->isChecked();
+
+    if(!montantCroissant && !montantDecroissant && !dateDepotCroissant && dateDepotDecroissant && !dateRetraitCroissant && !dateRetraitDecroissant && !nbPiecesCroissant && !nbPiecesDecroissant)
+        ui->tableView->setModel(Etmp.TrierCommande("dateDepotDecroissant"));
+    else
+        ui->tableView->setModel(Etmp.afficherCommande());
+}
+
+void MainWindow::on_checkBox_12_stateChanged(int arg1)//etat du checkbox dateRetrait croissant change
+{
+    bool montantCroissant=ui->checkBox_8->isChecked();
+    bool montantDecroissant=ui->checkBox_9->isChecked();
+    bool dateDepotCroissant=ui->checkBox_10->isChecked();
+    bool dateDepotDecroissant=ui->checkBox_11->isChecked();
+    bool dateRetraitCroissant=ui->checkBox_12->isChecked();
+    bool dateRetraitDecroissant=ui->checkBox_13->isChecked();
+    bool nbPiecesCroissant=ui->checkBox_14->isChecked();
+    bool nbPiecesDecroissant=ui->checkBox_15->isChecked();
+
+    if(!montantCroissant && !montantDecroissant && !dateDepotCroissant && !dateDepotDecroissant && dateRetraitCroissant && !dateRetraitDecroissant && !nbPiecesCroissant && !nbPiecesDecroissant)
+        ui->tableView->setModel(Etmp.TrierCommande("dateRetraitCroissant"));
+    else
+        ui->tableView->setModel(Etmp.afficherCommande());
+}
+
+void MainWindow::on_checkBox_13_stateChanged(int arg1)//etat du checkbox dateRetrait decroissant change
+{
+    bool montantCroissant=ui->checkBox_8->isChecked();
+    bool montantDecroissant=ui->checkBox_9->isChecked();
+    bool dateDepotCroissant=ui->checkBox_10->isChecked();
+    bool dateDepotDecroissant=ui->checkBox_11->isChecked();
+    bool dateRetraitCroissant=ui->checkBox_12->isChecked();
+    bool dateRetraitDecroissant=ui->checkBox_13->isChecked();
+    bool nbPiecesCroissant=ui->checkBox_14->isChecked();
+    bool nbPiecesDecroissant=ui->checkBox_15->isChecked();
+
+    if(!montantCroissant && !montantDecroissant && !dateDepotCroissant && !dateDepotDecroissant && !dateRetraitCroissant && dateRetraitDecroissant && !nbPiecesCroissant && !nbPiecesDecroissant)
+        ui->tableView->setModel(Etmp.TrierCommande("dateRetraitDecroissant"));
+    else
+        ui->tableView->setModel(Etmp.afficherCommande());
+}
+
+void MainWindow::on_checkBox_14_stateChanged(int arg1)//etat du checkbox nbpieces croissant change
+{
+    bool montantCroissant=ui->checkBox_8->isChecked();
+    bool montantDecroissant=ui->checkBox_9->isChecked();
+    bool dateDepotCroissant=ui->checkBox_10->isChecked();
+    bool dateDepotDecroissant=ui->checkBox_11->isChecked();
+    bool dateRetraitCroissant=ui->checkBox_12->isChecked();
+    bool dateRetraitDecroissant=ui->checkBox_13->isChecked();
+    bool nbPiecesCroissant=ui->checkBox_14->isChecked();
+    bool nbPiecesDecroissant=ui->checkBox_15->isChecked();
+
+    if(!montantCroissant && !montantDecroissant && !dateDepotCroissant && !dateDepotDecroissant && !dateRetraitCroissant && !dateRetraitDecroissant && nbPiecesCroissant && !nbPiecesDecroissant)
+        ui->tableView->setModel(Etmp.TrierCommande("nbpiecesCroissant"));
+    else
+        ui->tableView->setModel(Etmp.afficherCommande());
+}
+
+void MainWindow::on_checkBox_15_stateChanged(int arg1)
+{
+    bool montantCroissant=ui->checkBox_8->isChecked();
+    bool montantDecroissant=ui->checkBox_9->isChecked();
+    bool dateDepotCroissant=ui->checkBox_10->isChecked();
+    bool dateDepotDecroissant=ui->checkBox_11->isChecked();
+    bool dateRetraitCroissant=ui->checkBox_12->isChecked();
+    bool dateRetraitDecroissant=ui->checkBox_13->isChecked();
+    bool nbPiecesCroissant=ui->checkBox_14->isChecked();
+    bool nbPiecesDecroissant=ui->checkBox_15->isChecked();
+
+    if(!montantCroissant && !montantDecroissant && !dateDepotCroissant && !dateDepotDecroissant && !dateRetraitCroissant && !dateRetraitDecroissant && !nbPiecesCroissant && nbPiecesDecroissant)
+        ui->tableView->setModel(Etmp.TrierCommande("nbpiecesDecroissant"));
+    else
+        ui->tableView->setModel(Etmp.afficherCommande());
+}
+
+void MainWindow::on_lineEdit_4_textChanged(const QString &arg1)
+{
+    QString query=ui->lineEdit_4->text();
+    if(query.length()>0)
+        ui->tableView->setModel(Etmp.Rechercher(query));
+    else
+        ui->tableView->setModel(Etmp.afficherCommande());
+}
+
+void MainWindow::on_checkBox_3_stateChanged(int arg1)//l'etat de la case livrable change
+{
+    bool livrable=ui->checkBox_3->isChecked();
+    bool nonLivrable=ui->checkBox_16->isChecked();
+    bool paye=ui->checkBox_4->isChecked();
+    bool nonPaye=ui->checkBox_7->isChecked();
+
+    if(livrable && !nonLivrable && !paye && !nonPaye)
+       ui->tableView->setModel(Etmp.Filtrer("livrable"));
+    else
+        ui->tableView->setModel(Etmp.afficherCommande());
+}
+
+void MainWindow::on_checkBox_16_stateChanged(int arg1)//l'etat de la case nonlivrable change
+{
+    bool livrable=ui->checkBox_3->isChecked();
+    bool nonLivrable=ui->checkBox_16->isChecked();
+    bool paye=ui->checkBox_4->isChecked();
+    bool nonPaye=ui->checkBox_7->isChecked();
+
+    if(!livrable && nonLivrable && !paye && !nonPaye)
+       ui->tableView->setModel(Etmp.Filtrer("nonLivrable"));
+    else
+        ui->tableView->setModel(Etmp.afficherCommande());
+}
+
+void MainWindow::on_checkBox_4_stateChanged(int arg1)//l'etat de la case paye change
+{
+    bool livrable=ui->checkBox_3->isChecked();
+    bool nonLivrable=ui->checkBox_16->isChecked();
+    bool paye=ui->checkBox_4->isChecked();
+    bool nonPaye=ui->checkBox_7->isChecked();
+
+    if(!livrable && !nonLivrable && paye && !nonPaye)
+       ui->tableView->setModel(Etmp.Filtrer("paye"));
+    else
+        ui->tableView->setModel(Etmp.afficherCommande());
+}
+
+void MainWindow::on_checkBox_7_stateChanged(int arg1)//l'etat de la case nonPaye change
+{
+    bool livrable=ui->checkBox_3->isChecked();
+    bool nonLivrable=ui->checkBox_16->isChecked();
+    bool paye=ui->checkBox_4->isChecked();
+    bool nonPaye=ui->checkBox_7->isChecked();
+
+    if(!livrable && !nonLivrable && !paye && nonPaye)
+       ui->tableView->setModel(Etmp.Filtrer("nonPaye"));
+    else
+        ui->tableView->setModel(Etmp.afficherCommande());
+}
+
+void MainWindow::on_pushButton_7_clicked()//click sur le boutton imprimer Recu
+{
+    //recuperer l'identifiant de la commande
+    QModelIndex index= ui->tableView->currentIndex();
+    QString data= ui->tableView->model()->data(index).toString();
+
+    QString idCommande,montant,nbpieces,idEmploye,idClient,dateRetrait,dateDepot;
+
+    QSqlQuery query;
+    query.prepare("Select montant,nbpieces,date_retrait,idEmploye,idClient,date_depot from commandes where  idcommande='"+data+"'");
+    if(query.exec())
+    {
+        //remplissage des champs avec les donnees de la commande selectionne
+        while(query.next())
+        {
+
+            /*string s = "geeksforgeeks";
+
+                int n = s.length();
+
+                // declaring character array
+                char char_array[n + 1];
+
+                // copying the contents of the
+                // string to char array
+                strcpy(char_array, s.c_str());*/
+
+
+
+            std::string idCommandeQr="00000000000000000000000000000000000000000000000"+data.toStdString();
+
+            int n = idCommandeQr.length();
+            char char_array[n + 1];  //chaine qui va contenir l'identifiant a etre encode
+            strcpy(char_array, idCommandeQr.c_str());//copie de la chaine qui va contenir l'identifiant a etre encode
+
+            montant=query.value(0).toString();
+            nbpieces=query.value(1).toString();
+            dateRetrait=query.value(2).toDateTime().toString();
+            idEmploye=query.value(3).toString();
+            idClient=query.value(4).toString();
+            dateDepot=query.value(5).toDateTime().toString();
+
+            const QrCode::Ecc errCorLvl = QrCode::Ecc::HIGH;  // Error correction level
+            const QrCode qr = QrCode::encodeText(char_array, errCorLvl); //generation du code QR
+            Etmp.qrCode.printRecu(qr,idCommandeQr,montant.toStdString(),nbpieces.toStdString(),idEmploye.toStdString(),idClient.toStdString(),dateRetrait.toStdString(),dateDepot.toStdString());
+
         }
     }
 }

@@ -5,7 +5,7 @@ Commandes::Commandes()
 
 }
 
-Commandes::Commandes(int nbPieces,int idClient,bool livrable,float montant)
+Commandes::Commandes(int nbPieces,int idClient,bool livrable,float montant,int idEmploye)
 {
     QDate dateCourrante;
 
@@ -14,6 +14,7 @@ Commandes::Commandes(int nbPieces,int idClient,bool livrable,float montant)
     this->dateDepot=dateCourrante.currentDate();
     this->livrable=livrable;
     this->montant=montant;
+    this->idEmploye=idEmploye;
 }
 
 
@@ -29,8 +30,12 @@ bool Commandes::ajouterCommande()
 
      QString nbPiecesStr = QString::number(nbPieces);
      QString montantStr = QString::number(montant);
+     QString idEmployeStr = QString::number(idEmploye);
+     QString idClientStr = QString::number(idClient);
 
-    query.prepare("insert into commandes (montant,nbpieces,livrable,statut,date_depot)" "values(:montant,:nbpieces,:livrable,:statut,:date_depot)");
+
+
+    query.prepare("insert into commandes (montant,nbpieces,livrable,statut,date_depot,idEmploye,idClient)" "values(:montant,:nbpieces,:livrable,:statut,:date_depot,:idEmploye,:idClient)");
 
 
     //creation des variables
@@ -38,6 +43,8 @@ bool Commandes::ajouterCommande()
     query.bindValue(":nbpieces",nbPiecesStr);
     query.bindValue(":montant",montantStr);
     query.bindValue(":date_depot",dateDepot);
+    query.bindValue(":idEmploye",idEmployeStr);
+    query.bindValue(":idClient",idClientStr);
 
     if(statut==true)
         query.bindValue(":statut","Paye");
@@ -79,7 +86,25 @@ QSqlQueryModel* Commandes::afficherCommande()
      return model;
 }
 
-bool Commandes::modifierCommande(int nbPieces,int idEmploye,QString livrable,float montant,QDate dateRetrait,QString statut,int idCommande)
+QSqlQueryModel* Commandes::remplirComboBoxClient()
+{
+    QSqlQueryModel * model = new QSqlQueryModel();
+
+     model->setQuery("select * from CLIENT");
+     model->setHeaderData(0,Qt::Horizontal,QObject::tr("ID_CL"));
+     return model;
+}//comboBox_5
+
+QSqlQueryModel* Commandes::remplirComboBoxEmploye()
+{
+    QSqlQueryModel * model = new QSqlQueryModel();
+
+     model->setQuery("select * from EMPLOYES");
+     model->setHeaderData(0,Qt::Horizontal,QObject::tr("ID_EMP"));
+     return model;
+}
+
+bool Commandes::modifierCommande(int nbPieces,int idEmploye,QString livrable,float montant,QDate dateRetrait,QString statut,int idCommande,int idClient)
 {
     QSqlQuery query;
 
@@ -87,8 +112,9 @@ bool Commandes::modifierCommande(int nbPieces,int idEmploye,QString livrable,flo
     QString montantStr = QString::number(montant);
     QString idCommandeStr = QString::number(idCommande);
     QString idEmployeStr = QString::number(idEmploye);
+    QString idClientStr = QString::number(idClient);
 
-    query.prepare("update commandes set montant= :montant,nbpieces= :nbpieces,livrable= :livrable,statut= :statut,date_retrait=:date_retrait,idEmploye=:idEmploye where idcommande = :idcommande");
+    query.prepare("update commandes set montant= :montant,nbpieces= :nbpieces,livrable= :livrable,statut= :statut,date_retrait=:date_retrait,idEmploye=:idEmploye,idClient=:idClient where idcommande = :idcommande");
     query.bindValue(":nbpieces",nbPiecesStr);
     query.bindValue(":montant",montantStr);
     query.bindValue(":idcommande",idCommandeStr);
@@ -96,8 +122,77 @@ bool Commandes::modifierCommande(int nbPieces,int idEmploye,QString livrable,flo
     query.bindValue(":statut",statut);
     query.bindValue(":date_retrait",dateRetrait);
     query.bindValue(":idEmploye",idEmployeStr);
+    query.bindValue(":idClient",idClientStr);
     return  query.exec();
 }
+
+
+QSqlQueryModel* Commandes::TrierCommande(QString tri)
+{
+    QSqlQueryModel * model = new QSqlQueryModel();
+
+    if(tri=="montantCroissant")
+        model->setQuery("select * from commandes order by montant asc");
+    else if(tri=="montantDecroissant")
+        model->setQuery("select * from commandes order by montant desc");
+    else if(tri=="dateDepotCroissant")
+        model->setQuery("select * from commandes order by date_depot asc");
+    else if(tri=="dateDepotDecroissant")
+        model->setQuery("select * from commandes order by date_depot desc");
+    else if(tri=="dateRetraitCroissant")
+        model->setQuery("select * from commandes order by date_retrait asc");
+    else if(tri=="dateRetraitDecroissant")
+        model->setQuery("select * from commandes order by date_retrait desc");
+    else if(tri=="nbpiecesCroissant")
+        model->setQuery("select * from commandes order by nbpieces asc");
+    else if(tri=="nbpiecesDecroissant")
+        model->setQuery("select * from commandes order by nbpieces desc");
+
+
+     model->setHeaderData(0,Qt::Horizontal,QObject::tr("idCommande"));
+     model->setHeaderData(1,Qt::Horizontal,QObject::tr("idClient"));
+     model->setHeaderData(2,Qt::Horizontal,QObject::tr("Montant"));
+
+     return model;
+}
+
+
+
+QSqlQueryModel* Commandes::Rechercher(QString query)
+{
+    QSqlQueryModel * model = new QSqlQueryModel();
+
+     model->setQuery("select * from commandes where idCommande like '%"+query+"%' or idClient like '%"+query+"%' or idEmploye like '%"+query+"%' ");
+     model->setHeaderData(0,Qt::Horizontal,QObject::tr("idCommande"));
+     model->setHeaderData(1,Qt::Horizontal,QObject::tr("idClient"));
+     model->setHeaderData(2,Qt::Horizontal,QObject::tr("Montant"));
+
+     return model;
+}
+
+QSqlQueryModel* Commandes::Filtrer(QString query)
+{
+    QSqlQueryModel * model = new QSqlQueryModel();
+
+     if(query=="livrable")
+        model->setQuery("select * from commandes where livrable='Oui'");
+     else if(query=="nonLivrable")
+         model->setQuery("select * from commandes where livrable='Non'");
+     else if(query=="paye")
+         model->setQuery("select * from commandes where statut='Paye'");
+     else if(query=="nonPaye")
+         model->setQuery("select * from commandes where statut='Non-Paye'");
+
+     /*model->setHeaderData(0,Qt::Horizontal,QObject::tr("idCommande"));
+     model->setHeaderData(1,Qt::Horizontal,QObject::tr("idClient"));
+     model->setHeaderData(2,Qt::Horizontal,QObject::tr("Montant"));*/
+
+     return model;
+}
+
+
+
+
 
 /*
     Personnel::Personnel()

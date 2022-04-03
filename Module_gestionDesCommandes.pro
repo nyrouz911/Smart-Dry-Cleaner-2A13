@@ -19,12 +19,16 @@ SOURCES += \
     commandes.cpp \
     connection.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    qr_code.cpp \
+    qrcodegen.cpp
 
 HEADERS += \
     commandes.h \
     connection.h \
-    mainwindow.h
+    mainwindow.h \
+    qr_code.h \
+    qrcodegen.hpp
 
 FORMS += \
     mainwindow.ui
