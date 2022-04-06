@@ -18,15 +18,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
+    abonnement.cpp \
     client.cpp \
     connection.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    notification.cpp
 
 HEADERS += \
+    abonnement.h \
     client.h \
     connection.h \
-    mainwindow.h
+    mainwindow.h \
+    notification.h
 
 FORMS += \
     mainwindow.ui
@@ -35,3 +39,6 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    translation.qrc
