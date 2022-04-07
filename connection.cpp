@@ -14,10 +14,9 @@ db.setPassword("mayssen");//inserer mot de passe de cet utilisateur
 
 if (db.open())
 test=true;
+return  test;
 
 
 
 
-
-    return  test;
 }

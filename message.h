@@ -1,48 +1,29 @@
 #ifndef MESSAGE_H
 #define MESSAGE_H
+#include <QString>
+#include <QSqlQueryModel>
 
-#include <QDialog>
-
-namespace Ui {
-class message;
-}
-
-class message : public QDialog
+class Message
 {
-    Q_OBJECT
-
-/*public:
-    explicit message(QWidget *parent = nullptr);
-    ~message();
-
-private:
-    Ui::message *ui;
-};
-
-#endif // MESSAGE_H*/
 public:
-    explicit message(QWidget *parent = nullptr);
-    ~message();
-    QString hostname() const;
-    quint16 port() const;
-private slots:
-    void on_ok_clicked();
+    Message();
+    Message(QString);
+    //GET
+    QString getMessage();
 
-    void on_cancel_clicked();
 
-private:
-    Ui::message *ui;
-    QString mHostname;
-    quint16 mPort;
+    //SET
+    void setMessage (QString);
+
+
+    //FN
+    bool ajouterM();
+    QSqlQueryModel* afficherM();
+
+
+ private:
+    QString message;
 };
-inline QString message::hostname() const
-{
-    return mHostname;
-}
 
-inline quint16 message::port() const
-{
-    return mPort;
-}
 
-#endif // MESSENGERCONNECTION_H
+#endif // MESSAGE_H

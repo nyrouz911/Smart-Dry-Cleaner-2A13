@@ -1,27 +1,36 @@
 #include "message.h"
-#include "ui_message.h"
-
-message::message(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::message)
+#include <QSqlQuery>
+#include <QtDebug>
+#include <QObject>
+#include <QSqlQueryModel>
+Message::Message()
 {
-    ui->setupUi(this);
-}
-message::~message()
-{
-    delete ui;
+     message=" ";
 }
 
-void message::on_ok_clicked()
+Message::Message( QString message)
 {
-    mHostname=ui->hostname->text();
-    mPort=ui->port->value();
-    accept();
+    this->message=message;
 }
 
-void message::on_cancel_clicked()
+QString Message::getMessage(){return message;}
+void Message::setMessage (QString message){this->message=message;}
+
+bool Message::ajouterM()
 {
-    reject();
+    QSqlQuery query;
+
+         query.prepare("INSERT INTO MESSAGE (message) "
+                       "VALUES (:message)");
+
+         query.bindValue(":message", message);
+         return query.exec();
 }
 
-
+QSqlQueryModel* Message::afficherM()
+{
+    QSqlQueryModel * model = new QSqlQueryModel();
+        model->setQuery("select * from MESSAGE");
+        model->setHeaderData(0,Qt::Horizontal,QObject::tr("message"));
+        return model;
+}
