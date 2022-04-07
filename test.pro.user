@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.11.0, 2022-03-11T04:56:49. -->
+<!-- Written by QtCreator 4.11.0, 2022-04-04T16:32:22. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -24,9 +24,10 @@
    </valuemap>
    <valuemap type="QVariantMap" key="EditorConfiguration.CodeStyle.1">
     <value type="QString" key="language">QmlJS</value>
-    <valuemap type=<?xml version="1.0" encoding="UTF-8"?>
+    <valuemap type="QVariantMap" key="value">
+     <value type="QByteArray" key="CurrentPreferences">QmlJSGlobal</value><?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.11.0, 2022-03-11T04:56:49. -->
+<!-- Written by QtCreator 4.11.0, 2022-04-04T16:32:22. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
