@@ -27,6 +27,10 @@ private slots:
 
     void on_modifier_main_clicked();
 
+    void on_pushButton_clicked();
+
+    void on_mail_clicked();
+
 private:
     Ui::interventions *ui;
     intervention intertmp;

@@ -160,16 +160,6 @@
       </rect>
      </property>
     </widget>
-    <widget class="QTextEdit" name="descr_main">
-     <property name="geometry">
-      <rect>
-       <x>130</x>
-       <y>110</y>
-       <width>161</width>
-       <height>71</height>
-      </rect>
-     </property>
-    </widget>
     <widget class="QLineEdit" name="id_mach">
      <property name="geometry">
       <rect>
@@ -206,13 +196,23 @@
       <string>Ajouter</string>
      </property>
     </widget>
-    <widget class="QDateEdit" name="date_main">
+    <widget class="QLineEdit" name="date_main">
      <property name="geometry">
       <rect>
        <x>130</x>
        <y>190</y>
-       <width>110</width>
-       <height>22</height>
+       <width>113</width>
+       <height>21</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="descr_main">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>120</y>
+       <width>113</width>
+       <height>21</height>
       </rect>
      </property>
     </widget>
@@ -272,7 +272,7 @@
       <x>350</x>
       <y>20</y>
       <width>431</width>
-      <height>351</height>
+      <height>321</height>
      </rect>
     </property>
     <property name="title">
@@ -284,10 +284,23 @@
        <x>10</x>
        <y>20</y>
        <width>411</width>
-       <height>321</height>
+       <height>291</height>
       </rect>
      </property>
     </widget>
+   </widget>
+   <widget class="QPushButton" name="mail">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>350</y>
+      <width>91</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Envoyer un mail </string>
+    </property>
    </widget>
   </widget>
  </widget>

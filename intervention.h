@@ -10,18 +10,18 @@ class intervention
 {
     QString type_main,descr_main;
     int id_main,etat_main,id_mach;
-    QDate date_main;
+    QString date_main;
 public:
     //constructors
 
     intervention(){};
-    intervention(int,QString,int,QString,QDate,int);
+    intervention(int,QString,int,QString,QString,int);
     //getters
     int getid_main(){return id_main;}
     QString gettype_main(){return type_main;}
     int getetat_main(){return etat_main;}
     QString getdescr_main(){return descr_main;}
-    QDate getdate_main(){return date_main;}
+    QString getdate_main(){return date_main;}
     int getid_mach(){return id_mach;}
     //setters
     void setid_main(int id){this->id_main=id;}

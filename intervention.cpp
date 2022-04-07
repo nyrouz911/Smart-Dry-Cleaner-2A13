@@ -1,6 +1,10 @@
 #include "intervention.h"
+#include "interventions.h"
+#include <QSqlQuery>
+#include <QMessageBox>
+#include <QVBoxLayout>
 
-intervention::intervention(int id_main,QString type_main , int etat_main, QString descr_main , QDate date_main, int id_mach)
+intervention::intervention(int id_main,QString type_main , int etat_main, QString descr_main , QString date_main, int id_mach)
 {
     this->id_main=id_main;
     this->type_main=type_main;
@@ -16,10 +20,10 @@ bool intervention::ajoutermain()
     QString res= QString::number(id_main);
 
 
-    query.prepare("insert into interventions (id_main,type_main,etat_main,descr_main,date_main) values (:id_main,:type_main,:etat_main,:descr_main,:date_main,:id_mach)");
+    query.prepare("insert into interventions (id_main,type_main,etat_main,descr_main,date_main,id_mach) values (:id_main,:type_main,:etat_main,:descr_main,:date_main,:id_mach)");
 
     query.bindValue(":id_main",res);
-    query.bindValue(":type",type_main);
+    query.bindValue(":type_main",type_main);
     query.bindValue(":etat_mach",etat_main);
     query.bindValue(":descr_main",descr_main);
     query.bindValue(":date_main",date_main);

@@ -30,7 +30,10 @@ public:
     bool supprimermach(int);
     bool modifiermach(int);
     QSqlQueryModel * affichermach();
-    QSqlQueryModel * cherchermach(QString);
+
+    QSqlQueryModel * tri_fab();
+    QSqlQueryModel * tri_type();
+    QSqlQueryModel * tri_etat();
 };
 
 #endif // MACHINE_H
