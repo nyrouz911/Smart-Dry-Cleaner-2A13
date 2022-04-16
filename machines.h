@@ -50,6 +50,8 @@ public:
 
     void on_clear_clicked();
 
+    void on_temp_clicked();
+
 private:
     Ui::Machines *ui;
     Machine_f Machtmp;

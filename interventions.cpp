@@ -7,7 +7,6 @@
 #include <QMessageBox>
 #include <QVBoxLayout>
 #include <QScrollArea>
-#include <QDebug>
 #include <QTimer>
 
 

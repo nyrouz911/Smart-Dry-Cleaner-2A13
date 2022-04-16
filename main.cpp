@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
     QString lang =QInputDialog::getItem(NULL,"Select your language","Language",languages);
     if(lang=="English")
     {
-        t.load(":/English.qm");
+        t.load(":/english.qm");
     }
     if(lang!="French")
     {

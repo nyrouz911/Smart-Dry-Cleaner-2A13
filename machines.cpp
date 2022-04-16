@@ -8,7 +8,7 @@
 #include <QTimer>
 #include "interventions.h"
 #include "smtp.h"
-
+#include "temp.h"
 
 Machines::Machines(QWidget *parent):
     QDialog(parent),
@@ -202,4 +202,11 @@ void Machines::on_clear_clicked()
 {
     ui->tableView->setModel(Machtmp.affichermach());
 
+}
+
+void Machines::on_temp_clicked()
+{
+    temp t;
+    t.setModal(true);
+    t.exec();
 }

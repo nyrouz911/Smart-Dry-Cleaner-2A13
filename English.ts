@@ -6,12 +6,12 @@
     <message>
         <location filename="machines.ui" line="14"/>
         <source>Dialog</source>
-        <translation>CleanApp</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="machines.ui" line="30"/>
         <source>Gestion Des Machines</source>
-        <translation>Machine Management</translation>
+        <translation>Machines Management</translation>
     </message>
     <message>
         <location filename="machines.ui" line="42"/>
@@ -26,7 +26,7 @@
     <message>
         <location filename="machines.ui" line="87"/>
         <source>Num Tel du Fabricant</source>
-        <translation>Manufacturer Phone Number</translation>
+        <translation>Manufacturer phone number</translation>
     </message>
     <message>
         <location filename="machines.ui" line="110"/>
@@ -41,7 +41,7 @@
     <message>
         <location filename="machines.ui" line="129"/>
         <source>En Panne</source>
-        <translation>Broken-down</translation>
+        <translation>Broken</translation>
     </message>
     <message>
         <location filename="machines.ui" line="134"/>
@@ -51,7 +51,7 @@
     <message>
         <location filename="machines.ui" line="148"/>
         <source>Etat</source>
-        <translation>State</translation>
+        <translation>Status</translation>
     </message>
     <message>
         <location filename="machines.ui" line="161"/>
@@ -85,37 +85,77 @@
         <translation>Show Machines</translation>
     </message>
     <message>
-        <location filename="machines.ui" line="302"/>
+        <location filename="machines.ui" line="292"/>
         <source>Trier</source>
         <translation>Sort</translation>
     </message>
     <message>
-        <location filename="machines.ui" line="315"/>
+        <location filename="machines.ui" line="305"/>
         <source>Chercher:</source>
         <translation>Search:</translation>
     </message>
     <message>
-        <location filename="machines.ui" line="328"/>
+        <location filename="machines.ui" line="318"/>
+        <source>FAB</source>
+        <translation>MAN</translation>
+    </message>
+    <message>
+        <location filename="machines.ui" line="331"/>
+        <source>TYPE</source>
+        <translation>TYPE</translation>
+    </message>
+    <message>
+        <location filename="machines.ui" line="344"/>
+        <source>ETAT</source>
+        <translation>STATUS</translation>
+    </message>
+    <message>
+        <location filename="machines.ui" line="357"/>
+        <source>X</source>
+        <translation>X</translation>
+    </message>
+    <message>
+        <location filename="machines.ui" line="371"/>
         <source>Gérer les interventions</source>
-        <translation>Manage Interventions</translation>
+        <translation>Interventions Management</translation>
     </message>
     <message>
-        <location filename="machines.ui" line="341"/>
-        <source>FR</source>
-        <translation></translation>
+        <location filename="machines.ui" line="384"/>
+        <source>Maintenances :</source>
+        <translation>Maintenances:</translation>
     </message>
     <message>
-        <location filename="machines.ui" line="354"/>
-        <source>ENG</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="machines.ui" line="369"/>
+        <location filename="machines.ui" line="400"/>
         <source>Gestion Des Produits</source>
         <translation>Products Management</translation>
     </message>
     <message>
-        <location filename="machines.ui" line="374"/>
+        <location filename="machines.ui" line="438"/>
+        <source>Contact</source>
+        <translation>Contact</translation>
+    </message>
+    <message>
+        <location filename="machines.ui" line="453"/>
+        <source>Sujet</source>
+        <translation>Subject</translation>
+    </message>
+    <message>
+        <location filename="machines.ui" line="482"/>
+        <source>Message</source>
+        <translation>Message</translation>
+    </message>
+    <message>
+        <location filename="machines.ui" line="498"/>
+        <source>Mail</source>
+        <translation>Mail</translation>
+    </message>
+    <message>
+        <location filename="machines.ui" line="540"/>
+        <source>envoyer</source>
+        <translation>Send</translation>
+    </message>
+    <message>
+        <location filename="machines.ui" line="548"/>
         <source>Gestion Des Commandes</source>
         <translation>Orders Management</translation>
     </message>
@@ -123,111 +163,129 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="interventions.cpp" line="55"/>
-        <location filename="interventions.cpp" line="76"/>
-        <location filename="machines.cpp" line="54"/>
-        <location filename="machines.cpp" line="76"/>
+        <location filename="interventions.cpp" line="54"/>
+        <location filename="interventions.cpp" line="75"/>
+        <location filename="machines.cpp" line="55"/>
+        <location filename="machines.cpp" line="77"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="interventions.cpp" line="56"/>
-        <location filename="machines.cpp" line="55"/>
+        <location filename="interventions.cpp" line="55"/>
+        <location filename="machines.cpp" line="56"/>
         <source>Ajout effectué
 Click Cancel to exit.</source>
         <translation>Added Successfully
 Click Cancel to exit.</translation>
     </message>
     <message>
-        <location filename="interventions.cpp" line="61"/>
-        <location filename="machines.cpp" line="60"/>
+        <location filename="interventions.cpp" line="60"/>
+        <location filename="machines.cpp" line="61"/>
         <source>NOT OK</source>
         <translation>NOT OK</translation>
     </message>
     <message>
-        <location filename="interventions.cpp" line="62"/>
-        <location filename="machines.cpp" line="61"/>
+        <location filename="interventions.cpp" line="61"/>
+        <location filename="machines.cpp" line="62"/>
         <source>Ajout non effectué.
 Click Cancel to exit.</source>
-        <translation>Failed to Add
-Click cancel to exit.</translation>
+        <translation>Couldn&apos;t Add 
+Click Cancel to exit.</translation>
     </message>
     <message>
-        <location filename="interventions.cpp" line="77"/>
-        <location filename="machines.cpp" line="77"/>
+        <location filename="interventions.cpp" line="76"/>
+        <location filename="machines.cpp" line="78"/>
         <source>Suppression effectuée.
 Click Cancel to exit.</source>
-        <translation>Deleted Successfully
-Click cancel to exit.</translation>
+        <translation>Deleted Successfully.
+Click Cancel to exit.</translation>
     </message>
     <message>
-        <location filename="interventions.cpp" line="99"/>
-        <location filename="interventions.cpp" line="102"/>
-        <location filename="machines.cpp" line="99"/>
-        <location filename="machines.cpp" line="102"/>
+        <location filename="interventions.cpp" line="98"/>
+        <location filename="interventions.cpp" line="101"/>
+        <location filename="machines.cpp" line="100"/>
+        <location filename="machines.cpp" line="103"/>
         <source>update status</source>
-        <translation>Update Status</translation>
+        <translation>Update status</translation>
     </message>
     <message>
-        <location filename="interventions.cpp" line="99"/>
-        <location filename="machines.cpp" line="99"/>
+        <location filename="interventions.cpp" line="98"/>
+        <location filename="machines.cpp" line="100"/>
         <source>Machine updated.
 Click Cancel to exit.</source>
-        <translation></translation>
+        <translation>Machine updated.
+Click Cancel to exit.</translation>
     </message>
     <message>
-        <location filename="interventions.cpp" line="102"/>
-        <location filename="machines.cpp" line="102"/>
+        <location filename="interventions.cpp" line="101"/>
+        <location filename="machines.cpp" line="103"/>
         <source>Machine not updated.
 Click Cancel to exit.</source>
-        <translation></translation>
+        <translation>Machine not updated.
+Click Cancel to exit.</translation>
     </message>
     <message>
-        <location filename="machine.cpp" line="73"/>
-        <source>ID_MACH</source>
-        <translation></translation>
+        <location filename="machines.cpp" line="176"/>
+        <source>SEARCH</source>
+        <translation>SEARCH</translation>
     </message>
     <message>
-        <location filename="machine.cpp" line="74"/>
-        <source>TYPE</source>
-        <translation></translation>
+        <location filename="machines.cpp" line="177"/>
+        <source>NO MATCH FOUND !!
+Click Cancel to exit.</source>
+        <translation>NO MATCH FOUND !!
+Click Cancel to exit.</translation>
     </message>
     <message>
-        <location filename="machine.cpp" line="75"/>
-        <source>ETAT_MACH</source>
-        <translation>STATE_MACH</translation>
-    </message>
-    <message>
-        <location filename="machine.cpp" line="76"/>
-        <source>FAB</source>
-        <translation>Manufacturer</translation>
-    </message>
-    <message>
-        <location filename="machine.cpp" line="77"/>
-        <source>NUM_FAB</source>
-        <translation>Manufacturer phone number</translation>
-    </message>
-    <message>
-        <location filename="main.cpp" line="21"/>
+        <location filename="main.cpp" line="38"/>
         <source>database is open</source>
-        <translation></translation>
+        <translation>database is open</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="22"/>
+        <location filename="main.cpp" line="39"/>
         <source>connection successful.
 Click Cancel to exit.</source>
-        <translation></translation>
+        <translation>connection successful.
+Click Cancel to exit.</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="27"/>
+        <location filename="main.cpp" line="44"/>
         <source>database is not open</source>
-        <translation></translation>
+        <translation>database is not open</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="28"/>
+        <location filename="main.cpp" line="45"/>
         <source>connection failed.
 Click Cancel to exit.</source>
-        <translation></translation>
+        <translation>connection failed.
+Click Cancel to exit.</translation>
+    </message>
+</context>
+<context>
+    <name>Smtp</name>
+    <message>
+        <location filename="smtp.cpp" line="193"/>
+        <source>Message sent</source>
+        <translation>Message sent</translation>
+    </message>
+    <message>
+        <location filename="smtp.cpp" line="203"/>
+        <source>Qt Simple SMTP client</source>
+        <translation>Qt Simple SMTP client</translation>
+    </message>
+    <message>
+        <location filename="smtp.cpp" line="203"/>
+        <source>Unexpected reply from SMTP server:
+
+</source>
+        <translation>Unexpected reply from SMTP server:
+
+</translation>
+    </message>
+    <message>
+        <location filename="smtp.cpp" line="205"/>
+        <source>Failed to send message</source>
+        <translation>Failed to send message</translation>
     </message>
 </context>
 <context>
@@ -245,7 +303,7 @@ Click Cancel to exit.</source>
     <message>
         <location filename="interventions.ui" line="38"/>
         <source>Ajouter Une Intervention</source>
-        <translation>Add An Intervention</translation>
+        <translation>Add A Machine</translation>
     </message>
     <message>
         <location filename="interventions.ui" line="50"/>
@@ -265,17 +323,17 @@ Click Cancel to exit.</source>
     <message>
         <location filename="interventions.ui" line="82"/>
         <source>Réparation</source>
-        <translation>Repaired</translation>
+        <translation>Repair</translation>
     </message>
     <message>
         <location filename="interventions.ui" line="87"/>
         <source>Révision</source>
-        <translation>Revised</translation>
+        <translation>Revision</translation>
     </message>
     <message>
         <location filename="interventions.ui" line="101"/>
         <source>Etat</source>
-        <translation>State</translation>
+        <translation>Status</translation>
     </message>
     <message>
         <location filename="interventions.ui" line="114"/>
@@ -296,7 +354,7 @@ Click Cancel to exit.</source>
     <message>
         <location filename="interventions.ui" line="183"/>
         <source>ID de la machine</source>
-        <translation>Machine ID</translation>
+        <translation>ID machine</translation>
     </message>
     <message>
         <location filename="interventions.ui" line="196"/>
@@ -306,7 +364,7 @@ Click Cancel to exit.</source>
     <message>
         <location filename="interventions.ui" line="230"/>
         <source>Supprimer Une Intervention</source>
-        <translation>Delete An Intervention</translation>
+        <translation>Delete an intervention</translation>
     </message>
     <message>
         <location filename="interventions.ui" line="265"/>
@@ -321,7 +379,7 @@ Click Cancel to exit.</source>
     <message>
         <location filename="interventions.ui" line="302"/>
         <source>Envoyer un mail </source>
-        <translation>Send An E-mail</translation>
+        <translation>Send a mail </translation>
     </message>
 </context>
 <context>
@@ -334,7 +392,7 @@ Click Cancel to exit.</source>
     <message>
         <location filename="mail.ui" line="52"/>
         <source>Contact</source>
-        <translation>Contact</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="mail.ui" line="67"/>
@@ -344,38 +402,38 @@ Click Cancel to exit.</source>
     <message>
         <location filename="mail.ui" line="96"/>
         <source>Message</source>
-        <translation>Message</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="mail.ui" line="112"/>
         <source>Mail</source>
-        <translation>Mail</translation>
+        <translation></translation>
     </message>
     <message>
-        <location filename="mail.ui" line="155"/>
+        <location filename="mail.ui" line="154"/>
         <source>envoyer</source>
         <translation>Send</translation>
     </message>
     <message>
-        <location filename="mail.cpp" line="198"/>
-        <source>Message sent</source>
-        <translation>Message Sent</translation>
-    </message>
-    <message>
-        <location filename="mail.cpp" line="208"/>
+        <location filename="mail.cpp" line="29"/>
         <source>Qt Simple SMTP client</source>
-        <translation></translation>
+        <translation>Qt Simple SMTP client</translation>
     </message>
     <message>
-        <location filename="mail.cpp" line="208"/>
-        <source>Unexpected reply from SMTP server:
+        <location filename="mail.cpp" line="29"/>
+        <source>Message sent!
 
 </source>
-        <translation></translation>
+        <translation>Message sent!
+
+</translation>
     </message>
+</context>
+<context>
+    <name>temp</name>
     <message>
-        <location filename="mail.cpp" line="210"/>
-        <source>Failed to send message</source>
+        <location filename="temp.ui" line="13"/>
+        <source>Dialog</source>
         <translation></translation>
     </message>
 </context>
