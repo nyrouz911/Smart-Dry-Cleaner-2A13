@@ -67,3 +67,5 @@ QSqlQueryModel * Arduino::affichertemp()
 
     return model;
 }
+
+

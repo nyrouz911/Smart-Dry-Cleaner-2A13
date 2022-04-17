@@ -2,6 +2,7 @@
 #define TEMP_H
 
 #include <QDialog>
+#include <QMessageBox>
 #include "connection.h"
 #include "QSqlDatabase"
 #include "arduino.h"
