@@ -3,7 +3,20 @@
 
 Arduino::Arduino()
 {
+    data="";
+    arduino_port_name="";
+    arduino_is_available=false;
+    serial=new QSerialPort;
+}
 
+QString Arduino::getarduino_port_name()
+{
+    return arduino_port_name;
+}
+
+QSerialPort *Arduino::getserial()
+{
+   return serial;
 }
 
 int Arduino::connect_Arduino()
@@ -56,7 +69,7 @@ int Arduino::write_to_arduino( QByteArray d)
         qDebug() << "Couldn't write to serial!";
     }
 
-    return (-1);
+
 }
 
 QSqlQueryModel * Arduino::affichertemp()

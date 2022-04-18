@@ -7,8 +7,32 @@ temp::temp(QWidget *parent) :
     ui(new Ui::temp)
 {
 
-    QByteArray d ("0");
+
     ui->setupUi(this);
+    ui->afficher_temp->setModel(t.affichertemp());
+
+    int ret=t.connect_Arduino();
+    switch(ret){
+    case(0):qDebug()<< "arduino is available and connected to : "<< t.getarduino_port_name();
+        break;
+    case(1):qDebug() << "arduino is available but not connected to :" <<t.getarduino_port_name();
+       break;
+    case(-1):qDebug() << "arduino is not available";
+    }
+     QObject::connect(t.getserial(),SIGNAL(readyRead()),this,SLOT(update_label()));
+
+}
+
+
+temp::~temp()
+{
+    delete ui;
+}
+
+
+
+void temp::on_actualiser_clicked()
+{
     ui->afficher_temp->setModel(t.affichertemp());
 
     QMessageBox msgBox;
@@ -24,18 +48,9 @@ temp::temp(QWidget *parent) :
         msgBox.setDefaultButton(QMessageBox::Ok);
         int ret = msgBox.exec();
         if (ret==QMessageBox::Ok)
-        {
-            d=("1");
-           t.write_to_arduino(d);
-        }
+
+           t.write_to_arduino("1");
+
 
      }
 }
-
-
-temp::~temp()
-{
-    delete ui;
-}
-
-

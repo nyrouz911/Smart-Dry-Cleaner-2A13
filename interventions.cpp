@@ -38,8 +38,9 @@ void interventions::on_ajouter_main_clicked()
     int id_main=ui->id_main->text().toInt();
     QString type_main=ui->type_main->text();
     int etat_main=ui->etat_main->currentIndex();
-    QString date_main=ui->date_main->text();
+
     QString descr_main=ui->descr_main->text();
+    QString date_main=ui->date_main->text();
     int id_mach=ui->id_mach->text().toInt();
 
     intervention intertmp(id_main,type_main,etat_main,descr_main,date_main,id_mach);

@@ -104,14 +104,6 @@ void Machines::on_modifier_clicked()
     }
 }
 
-//void Machines::on_chercher_textEdited(const QString &arg1)
-
-//void Machines::on_intervention_clicked()
-//{
-//    dialog = new interventions(this);
-//        dialog->setWindowFlags(Qt::Window);
-//        dialog->show();
-//}
 
 
 
@@ -126,40 +118,6 @@ void Machines::on_intervention_clicked()
     inter.exec();
 }
 
-
-//void Machines::on_chercher_textChanged(QString &arg1)
-//{
-//    QMessageBox msgBox;
-
-//        QSqlQuery query;
-//        QString id,prod;
-//        QString fab;
-//        int critere=ui->cbsearch->currentIndex();
-
-//        if(critere==0)
-//        {
-
-
-//            ui->tableView->setModel(Machtmp.searchbyid(arg1));
-
-
-//        }
-//           else if(critere==1)
-//           {
-//               ui->tableView->setModel(Machtmp.searchbyfab(arg1));
-
-//           }
-//           else if(critere==2)
-//           {
-//               ui->tableView->setModel(Machtmp.searchbyprod(arg1));
-//           }
-//}
-
-
-void Machines::on_cbsearch_activated(const QString &arg1)
-{
-
-}
 
 void Machines::on_chercher_textChanged(const QString &arg1)
 {

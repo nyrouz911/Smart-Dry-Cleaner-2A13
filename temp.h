@@ -20,6 +20,9 @@ public:
     explicit temp(QWidget *parent = nullptr);
     ~temp();
 
+private slots:
+    void on_actualiser_clicked();
+
 private:
     Ui::temp *ui;
     Arduino t;
