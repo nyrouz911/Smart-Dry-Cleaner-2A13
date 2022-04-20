@@ -17,9 +17,13 @@ void loop() {
     {
       digitalWrite(vent, HIGH);  
     //delay(2000);
-    //digitalWrite(2, LOW);  
+     
     //delay(3000);   
     }  
+    else
+    {
+      digitalWrite(2, LOW); 
+    }
      
      
   }

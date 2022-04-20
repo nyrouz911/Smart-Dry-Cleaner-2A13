@@ -53,4 +53,8 @@ void temp::on_actualiser_clicked()
 
 
      }
+    else
+    {
+        t.write_to_arduino("0");
+    }
 }
