@@ -33,6 +33,8 @@ interventions::~interventions()
 }
 
 
+
+
 void interventions::on_ajouter_main_clicked()
 {
     int id_main=ui->id_main->text().toInt();
@@ -108,4 +110,23 @@ void interventions::on_mail_clicked()
     mail m;
     m.setModal(true);
     m.exec();
+}
+
+void interventions::on_chercher_textChanged(const QString &arg1)
+{
+    {
+        QSqlQueryModel *model= new QSqlQueryModel();
+        QSqlQuery   *query= new QSqlQuery();
+        query->prepare("SELECT * FROM INTERVENTIONS WHERE ID_MAIN  LIKE'"+arg1+"%' or TYPE_MAIN  LIKE'"+arg1+"%' or ETAT_MAIN  LIKE'"+arg1+"%' or DESCR_MAIN LIKE'"+arg1+"%' or DATE_MAIN  LIKE'"+arg1+"%' or ID_MACH  LIKE'"+arg1+"%'  ");
+        query->exec();
+         if (query->next()) {
+         model->setQuery(*query);
+         ui->afficher_main->setModel(model);
+         }
+         else {
+             QMessageBox::critical(nullptr, QObject::tr("SEARCH"),
+                             QObject::tr("NO MATCH FOUND !!\n"
+                                         "Click Cancel to exit."), QMessageBox::Cancel);
+             ui->chercher->clear();}
+    }
 }

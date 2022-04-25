@@ -27,9 +27,11 @@ private slots:
 
     void on_modifier_main_clicked();
 
-    void on_pushButton_clicked();
+
 
     void on_mail_clicked();
+
+    void on_chercher_textChanged(const QString &arg1);
 
 private:
     Ui::interventions *ui;

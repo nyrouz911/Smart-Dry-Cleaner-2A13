@@ -2,9 +2,11 @@
 #define MACHINES_H
 
 #include <QDialog>
+#include <QMessageBox>
 #include "machine.h"
 #include <QVBoxLayout>
 #include "smtp.h"
+#include "arduino.h"
 #include <QBarSet>
 #include <QBarSeries>
 
@@ -26,19 +28,19 @@ public:
 
     void on_modifier_clicked();
 
-    void on_chercher_textEdited(const QString &arg1);
 
-    void on_pushButton_clicked();
+
+
 
     void on_intervention_clicked();
 
-    void on_pushButton_2_clicked();
 
-    //void on_chercher_textChanged(QString &arg1);
 
-    void on_cbsearch_activated(const QString &arg1);
 
-    void on_envoyer_clicked();
+
+
+
+
 
     void on_chercher_textChanged(const QString &arg1);
 
@@ -50,11 +52,13 @@ public:
 
     void on_clear_clicked();
 
-    void on_temp_clicked();
+
 
 private:
     Ui::Machines *ui;
     Machine_f Machtmp;
+    Arduino t;
+    QByteArray data;
 };
 
 #endif // MACHINES_H

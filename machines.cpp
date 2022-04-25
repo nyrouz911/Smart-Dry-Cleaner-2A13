@@ -8,7 +8,6 @@
 #include <QTimer>
 #include "interventions.h"
 #include "smtp.h"
-#include "temp.h"
 
 Machines::Machines(QWidget *parent):
     QDialog(parent),
@@ -28,6 +27,48 @@ Machines::Machines(QWidget *parent):
 	QRegularExpression rx3("\\b[A-Z._%+-]+@[A-Z.-]+\\.[A-Z]\\b",
 	QRegularExpression::CaseInsensitiveOption);
 
+    //connexion arduino
+
+    int ret=t.connect_Arduino();
+    switch(ret){
+    case(0):qDebug()<< "arduino is available and connected to : "<< t.getarduino_port_name();
+        break;
+    case(1):qDebug() << "arduino is available but not connected to :" <<t.getarduino_port_name();
+       break;
+    case(-1):qDebug() << "arduino is not available";
+    }
+     QObject::connect(t.getserial(),SIGNAL(readyRead()),this,SLOT(update_label()));
+
+     //temp checking
+     QMessageBox msgBox;
+
+     data=t.read_from_arduino();
+
+     qDebug() <<"data="<<data;
+
+     if(data=="1")
+     {
+
+     msgBox.setText("Une température anormale a été détectée !");
+     msgBox.setInformativeText("Voulez-vous activer le moteur de refroidissement?");
+     msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+     msgBox.setDefaultButton(QMessageBox::Ok);
+     int res = msgBox.exec();
+     if (res==QMessageBox::Ok)
+
+        t.write_to_arduino("1");
+
+    else
+      {
+        t.write_to_arduino("0");
+      }
+     }
+   else if(data=="0")
+     {
+         t.write_to_arduino("0");
+         qDebug() << "Couldn't read from serial!";
+
+    }
 }
 
 Machines::~Machines()
@@ -162,9 +203,3 @@ void Machines::on_clear_clicked()
 
 }
 
-void Machines::on_temp_clicked()
-{
-    temp t;
-    t.setModal(true);
-    t.exec();
-}

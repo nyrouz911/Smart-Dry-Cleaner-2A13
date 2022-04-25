@@ -24,7 +24,7 @@ bool intervention::ajoutermain()
 
     query.bindValue(":id_main",res);
     query.bindValue(":type_main",type_main);
-    query.bindValue(":etat_mach",etat_main);
+    query.bindValue(":etat_main",etat_main);
     query.bindValue(":descr_main",descr_main);
     query.bindValue(":date_main",date_main);
     query.bindValue(":id_mach",id_mach);
@@ -56,8 +56,8 @@ bool intervention::supprimermain(int id_main)
 bool intervention::modifiermain(int id_main)
 {
     QSqlQuery query;
-    query.prepare("Update interventions set type_main=:type_main,etat_main=:etat_main,descr_main=:descr_main,date_main=:date_main, :id_mach=id_mach where id_main=:id_main");
-    query.bindValue(":id_mach",id_main);
+    query.prepare("Update interventions set type_main=:type_main,etat_main=:etat_main,descr_main=:descr_main,date_main=:date_main,id_mach=:id_mach where id_main=:id_main");
+    query.bindValue(":id_main",id_main);
     query.bindValue(":type_main",type_main);
     query.bindValue(":etat_main",etat_main);
     query.bindValue(":descr_main",descr_main);
@@ -67,22 +67,5 @@ bool intervention::modifiermain(int id_main)
     return query.exec();
 }
 
-
-//QSqlQueryModel * intervention::cherchermain(QString id_main)
-//{
-//    QSqlQueryModel * model= new QSqlQueryModel();
-
-//    model->setQuery("SELECT * FROM INTERVENTIONS WHERE ID_MACH LIKE '%"+id_main+"%'" );
-
-//    model->query().bindValue(":ID_MAIN",id_main);
-//    model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID_MAIN"));
-//    model->setHeaderData(1, Qt::Horizontal, QObject::tr("TYPE_MAIN"));
-//    model->setHeaderData(2, Qt::Horizontal, QObject::tr("ETAT_MAIN"));
-//    model->setHeaderData(3, Qt::Horizontal, QObject::tr("DESCR_MAIN"));
-//    model->setHeaderData(4, Qt::Horizontal, QObject::tr("DATE_MAIN"));
-//    model->setHeaderData(5, Qt::Horizontal, QObject::tr("ID_MACH"));
-
-//    return model;
-//}
 
 
