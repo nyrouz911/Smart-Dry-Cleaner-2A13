@@ -5,8 +5,7 @@
 #include <QtSerialPort/QSerialPort>
 #include <QtSerialPort/QSerialPortInfo>
 
-#include <QSqlQuery>
-#include <QSqlQueryModel>
+
 
 class Arduino
 {
@@ -14,10 +13,11 @@ public:
     Arduino();
     int connect_Arduino();
     int close_Arduino();
+    QByteArray read_from_arduino();
     int write_to_arduino(QByteArray);
     QSerialPort* getserial();
     QString getarduino_port_name();
-    QSqlQueryModel * affichertemp();
+
 
 private:
     QSerialPort * serial;

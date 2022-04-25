@@ -60,6 +60,20 @@ int Arduino::close_Arduino()
     return 1;
 }
 
+QByteArray Arduino::read_from_arduino()
+{
+    if(serial->isReadable())
+    {
+        data=serial->readAll(); //kaeed yrajaa feha fergha
+        return data;
+
+    }
+    else
+    {
+        qDebug() << "Couldn't read from serial!";
+    }
+}
+
 int Arduino::write_to_arduino( QByteArray d)
 {
 
@@ -72,12 +86,4 @@ int Arduino::write_to_arduino( QByteArray d)
 
 }
 
-QSqlQueryModel * Arduino::affichertemp()
-{
-    QSqlQueryModel* model=new QSqlQueryModel();
-
-    model->setQuery("select * from temperatures");
-
-    return model;
-}
 

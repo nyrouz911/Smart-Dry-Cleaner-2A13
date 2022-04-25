@@ -35,8 +35,7 @@ SOURCES += \
     machines.cpp \
     mail.cpp \
     main.cpp \
-    smtp.cpp \
-    temp.cpp
+    smtp.cpp
 
 HEADERS += \
     arduino.h \
@@ -46,15 +45,13 @@ HEADERS += \
     machine.h \
     machines.h \
     mail.h \
-    smtp.h \
-    temp.h
+    smtp.h
 
 FORMS += \
     interventions.ui \
     machines.ui \
     mail.ui \
-    mail.ui \
-    temp.ui
+    mail.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
