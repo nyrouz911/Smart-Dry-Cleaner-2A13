@@ -23,6 +23,7 @@ Smtp::Smtp( const QString &user, const QString &pass, const QString &host, int p
 
 void Smtp::sendMail(const QString &from, const QString &to, const QString &subject, const QString &body)
 {
+
     message = "To: " + to + "\n";
     message.append("From: " + from + "\n");
     message.append("Subject: " + subject + "\n");

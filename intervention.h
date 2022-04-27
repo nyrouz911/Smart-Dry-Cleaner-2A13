@@ -14,6 +14,7 @@ class intervention
 public:
     //constructors
 
+
     intervention(){};
     intervention(int,QString,int,QString,QString,int);
     //getters

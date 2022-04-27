@@ -25,6 +25,7 @@ void mail::sendMail()
 
 void mail::mailSent(QString status)
 {
+
     if(status == "Message sent")
         QMessageBox::warning( 0, tr( "Qt Simple SMTP client" ), tr( "Message sent!\n\n" ) );
 }

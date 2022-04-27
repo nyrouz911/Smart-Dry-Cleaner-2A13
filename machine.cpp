@@ -66,6 +66,7 @@ bool Machine_f::modifiermach(int id_mach)
 QSqlQueryModel *Machine_f::tri_fab()
 {
 
+
     QSqlQuery *q = new QSqlQuery();
     QSqlQueryModel *model = new QSqlQueryModel();
     q->prepare("SELECT * FROM  Machines ORDER BY fab ");

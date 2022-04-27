@@ -130,3 +130,4 @@ void interventions::on_chercher_textChanged(const QString &arg1)
              ui->chercher->clear();}
     }
 }
+

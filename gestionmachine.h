@@ -46,6 +46,7 @@ private:
     Ui::gestionmachine *ui;
     Machine_f Machtmp;
 
+
     //Arduino t;
     QByteArray data;
 };

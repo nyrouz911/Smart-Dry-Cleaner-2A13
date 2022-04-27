@@ -11,6 +11,7 @@ class Machine_f
 public:
     //constructors
 
+
     Machine_f(){};
     Machine_f(int,QString,int,QString,QString);
     //getters

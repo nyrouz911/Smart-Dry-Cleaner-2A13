@@ -28,6 +28,8 @@ private slots:
 
 
 
+
+
     void on_mail_clicked();
 
     void on_chercher_textChanged(const QString &arg1);

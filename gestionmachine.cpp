@@ -95,6 +95,7 @@ Machine_f m(id_mach,type,etat_mach,fab,num_fab);
 
     if(test)
     {
+
         //refresh
         ui->tableView->setModel(Machtmp.affichermach());
 
