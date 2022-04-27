@@ -35,6 +35,8 @@ void loop()
     }
 
     //output
+
+    if (Serial.available()){   
     data=Serial.read();
     if(data=='1')
     {
@@ -45,5 +47,5 @@ void loop()
     digitalWrite(vent, LOW);  
     }
     }
-  
+}  
   
