@@ -63,21 +63,40 @@ void QR_Code::printRecu(const QrCode &qr,std::string idCommande,std::string mont
     string filename("nouveauRecu.txt");
     ofstream outfile(filename.c_str());
 
+    string buffer;
+
     int border = 1;
 
+    outfile<<"*****************RECU*****************"<<endl;
     outfile<<"ID COMMANDE:"<<idCommande<<endl;
-    outfile<<qr.getSize()<<"ID CLIENT:"<<idClient<<endl;
+    outfile<<"ID CLIENT:"<<idClient<<endl;
     outfile<<"ID EMPLOYE:"<<idEmploye<<endl;
     outfile<<"NOMBRE DE PIECES:"<<nbpieces<<endl;
     outfile<<"MONTANT:"<<montant<<endl;
     outfile<<"DATE DEPOT:"<<dateDepot<<endl;
     outfile<<"DATE RETRAIT:"<<dateRetrait<<endl;
-
+    outfile<<"________________________________________"<<endl;
     for (int y = -border; y < qr.getSize() + border; y++) {
         for (int x = -border; x < qr.getSize() + border; x++) {
-            outfile << (qr.getModule(x, y) ? "■■" : "  ");
+            outfile << (qr.getModule(x, y) ? "■■" :"  " ); //"□□"
         }
         outfile<<endl;
+
     }
     outfile<<endl;
+    outfile<<"****************************************"<<endl;
+
+
+    /******Impression du recu***/
+
+    QFile RecuImpression("nouveauRecu.txt");
+    QString Impression = RecuImpression.readAll();
+    QTextDocument document(Impression);
+
+    QPrinter printer;//imprimante
+    QPrintDialog *dialog = new QPrintDialog(&printer);
+    if(dialog->exec() == QDialog::Accepted)
+        document.print(&printer);
+
 }
+

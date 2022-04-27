@@ -12,6 +12,15 @@
 #include <string>
 #include <vector>
 #include "qrcodegen.hpp"
+#include "QString"
+
+/*pour gerer l'impression*/
+#include <QApplication>
+#include <QPrinter>
+#include <QPrintDialog>
+#include <QPainter>
+#include <QFile>
+#include <QTextDocument>
 
 
 using std::uint8_t;
@@ -28,6 +37,7 @@ public:
     static std::string toSvgString(const QrCode &qr, int border);
     static void printQr(const QrCode &qr);
     static void printRecu(const QrCode &qr,std::string idCommande,std::string montant,std::string nbpieces,std::string idEmploye,std::string idClient,std::string dateRetrait,std::string dateDepot);
+
 };
 
 
