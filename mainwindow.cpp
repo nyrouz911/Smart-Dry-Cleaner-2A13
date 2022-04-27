@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "gestionemployes.h"
+#include "gestionmachine.h"
 #include "gestionclient.h"
 #include "gestionlivraison.h"
 //#include "employes.h"
@@ -59,9 +60,9 @@ void MainWindow::on_pushButton_clicked()
     else if
             ((username=="technicienM")&&(password=="machine"))
                 {
-                  gestionemployes e1;
-                  e1.setModal(true);
-                  e1.exec();
+                  gestionmachine m1;
+                  m1.setModal(true);
+                  m1.exec();
 
 
                 }

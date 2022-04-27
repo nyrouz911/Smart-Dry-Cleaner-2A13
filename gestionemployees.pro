@@ -26,11 +26,17 @@ SOURCES += \
     gestionclient.cpp \
     gestionemployes.cpp \
     gestionlivraison.cpp \
+    gestionmachine.cpp \
+    intervention.cpp \
+    interventions.cpp \
     livraison.cpp \
+    machine.cpp \
+    mail.cpp \
     main.cpp \
     mainwindow.cpp \
     message.cpp \
-    notification.cpp
+    notification.cpp \
+    smtp.cpp
 
 HEADERS += \
     abonnement.h \
@@ -40,15 +46,24 @@ HEADERS += \
     gestionclient.h \
     gestionemployes.h \
     gestionlivraison.h \
+    gestionmachine.h \
+    intervention.h \
+    interventions.h \
     livraison.h \
+    machine.h \
+    mail.h \
     mainwindow.h \
     message.h \
-    notification.h
+    notification.h \
+    smtp.h
 
 FORMS += \
     gestionclient.ui \
     gestionemployes.ui \
     gestionlivraison.ui \
+    gestionmachine.ui \
+    interventions.ui \
+    mail.ui \
     mainwindow.ui
 
 # Default rules for deployment.

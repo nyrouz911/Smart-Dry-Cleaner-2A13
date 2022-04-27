@@ -19,26 +19,13 @@
      <x>0</x>
      <y>0</y>
      <width>801</width>
-     <height>551</height>
+     <height>531</height>
     </rect>
    </property>
    <property name="currentIndex">
     <number>0</number>
    </property>
    <widget class="QWidget" name="page">
-    <widget class="QPushButton" name="pushButton_10">
-     <property name="geometry">
-      <rect>
-       <x>270</x>
-       <y>120</y>
-       <width>121</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Gestions Livraisons</string>
-     </property>
-    </widget>
     <widget class="QPushButton" name="pushButton_11">
      <property name="geometry">
       <rect>
@@ -102,6 +89,19 @@
      </property>
      <property name="text">
       <string>Gestions Clients</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_livraison">
+     <property name="geometry">
+      <rect>
+       <x>270</x>
+       <y>120</y>
+       <width>121</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Gestions Livraisons</string>
      </property>
     </widget>
    </widget>
@@ -635,19 +635,6 @@
     </widget>
    </widget>
    <widget class="QWidget" name="page_3">
-    <widget class="QPushButton" name="pushButton_16">
-     <property name="geometry">
-      <rect>
-       <x>800</x>
-       <y>520</y>
-       <width>75</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Retour</string>
-     </property>
-    </widget>
     <widget class="QTabWidget" name="tabWidget_client">
      <property name="geometry">
       <rect>
@@ -1277,7 +1264,7 @@
      <property name="geometry">
       <rect>
        <x>670</x>
-       <y>540</y>
+       <y>530</y>
        <width>75</width>
        <height>23</height>
       </rect>
@@ -2098,6 +2085,19 @@ border: 2px solid rgb(82, 124, 124)
      </widget>
     </widget>
    </widget>
+  </widget>
+  <widget class="QPushButton" name="pushButton_retourb">
+   <property name="geometry">
+    <rect>
+     <x>680</x>
+     <y>540</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Retour </string>
+   </property>
   </widget>
  </widget>
  <resources/>

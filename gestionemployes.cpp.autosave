@@ -765,3 +765,5 @@ void gestionemployes::on_pushButton_retourb_clicked()
 {
      ui->stackedWidget->setCurrentIndex(0);
 }
+
+// BOUTONS NAYROUZ (machine

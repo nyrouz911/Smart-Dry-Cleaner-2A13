@@ -111,7 +111,7 @@ private slots:
 //bouton brahym
     //void on_pushButton_clicked();
 
-  /*  void on_ajouter_clicked();
+    void on_ajouter_clicked();
 
     void on_supprimer_clicked();
 
@@ -138,7 +138,11 @@ private slots:
     void on_Excel_clicked();
 
 
-    void on_ajouter_3_clicked();*/
+    void on_ajouter_3_clicked();
+
+    void on_pushButton_livraison_clicked();
+
+    void on_pushButton_retourb_clicked();
 
 private:
     Ui::gestionemployes *ui;
@@ -150,8 +154,8 @@ private:
     Notification n;
     abonnement a;
    client insclient;
-   //livraison l;
-   //livraison inslivraison;
+   livraison l;
+   livraison inslivraison;
 
 };
 #endif // MAINWINDOW_H
