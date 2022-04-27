@@ -4,6 +4,8 @@
 #include <QTranslator>
 #include <QInputDialog>
 #include "connection.h"
+#include "arduino.h"
+#include <QDebug>
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -13,6 +15,8 @@ int main(int argc, char *argv[])
     QStringList languages ;
    languages <<"Francais"<<"Anglais";
    QString lang = QInputDialog::getItem(NULL,"Selectionnez une langue","langues",languages);
+
+
 
 
 

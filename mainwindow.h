@@ -6,12 +6,16 @@
 #include <QSystemTrayIcon>
 #include "produit.h"
 #include "ui_mainwindow.h"
+#include "arduino.h"
 
 
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
+
+
+
 
 class MainWindow : public QMainWindow
 {
@@ -52,9 +56,14 @@ private slots:
 
     void on_pushButton_8_clicked();
 
+    void on_comboBox_activated(const QString &arg1);
+
+    void on_lineEdit_6_textChanged(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
     produit tmpproduit;
+    Arduino ard;
 };
 
 #endif // MAINWINDOW_H

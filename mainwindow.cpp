@@ -4,6 +4,7 @@
 #include <QPieSlice>
 #include <QPieSeries>
 #include <QtCharts>
+#include "arduino.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -19,6 +20,8 @@ MainWindow::MainWindow(QWidget *parent) :
             QRegExpValidator(rx,this);
     ui->lineEdit_2->setValidator(validator);
     ui->lineEdit_5->setValidator(validator);
+
+    ard.connectArduino();
 }
 
 MainWindow::~MainWindow()
@@ -34,7 +37,7 @@ void MainWindow::on_pushButton_clicked()
 
 
 
-    if( ui->lineEdit->text().isEmpty() || ui->lineEdit_2->text().isEmpty()|| ui->lineEdit_3->text().isEmpty()|| ui->lineEdit_4->text().isEmpty()|| ui->lineEdit_5->text().isEmpty()|| ui->lineEdit_6->text().isEmpty())
+    if( ui->lineEdit->text().isEmpty() || ui->lineEdit_2->text().isEmpty()|| ui->lineEdit_3->text().isEmpty()|| ui->lineEdit_4->text().isEmpty()|| ui->lineEdit_5->text().isEmpty() || ui->lineEdit_6->text().isEmpty())
     {
         ui->tableView ->setModel(tmpproduit.afficher());//refresh
         QMessageBox::warning(nullptr, QObject::tr("Attention"),
@@ -47,6 +50,9 @@ void MainWindow::on_pushButton_clicked()
         prix_unitaire=ui->lineEdit_4->text().toInt();
         type_machine=ui->lineEdit_5->text();
         image=ui->lineEdit_6->text();
+
+
+
 
 
 
@@ -238,9 +244,14 @@ void MainWindow::on_pushButton_5_clicked()
 void MainWindow::on_pushButton_8_clicked()
 {
         QString plan;
+
         QString file_name= QFileDialog::getOpenFileName(this,"open a file","c://");
        // QFile file("c://");
         ui->lineEdit_6->insert(file_name);
+        ui->label_7->setPixmap(file_name);
+        QImage image(file_name);
+                image=image.scaledToWidth(ui->label_7->width(),Qt::SmoothTransformation);
+                    ui->label_7->setPixmap(QPixmap::fromImage(image));
 
 }
 
@@ -256,7 +267,51 @@ void MainWindow::on_pushButton_7_clicked()
 void MainWindow::on_pushButton_4_clicked()
 {
 
+    ui->tableView->setModel(tmpproduit.AfficherTriprix());
+        QByteArray data = ard.readFromArduino();
+        float value = data.split(',')[0].toFloat();
 
-        ui->tableView->setModel(tmpproduit.AfficherTriprix());
+        qDebug() << value;
+        if ( data != "" ){
 
-         }
+            if(value < 2.30){
+                ui->label_8->setStyleSheet("QLabel { color : green; }");
+                ui->label_8->setText("Niveau Bas");
+            }
+            else if(value >= 2.30 && value <= 2.90 ){
+                ui->label_8->setStyleSheet("QLabel { color : orange; }");
+                ui->label_8->setText("Niveau Moyen");
+            }else{
+                ui->label_8->setStyleSheet("QLabel { color : red; }");
+                ui->label_8->setText("Niveau Haut");
+            }
+        }
+
+
+
+}
+
+void MainWindow::on_comboBox_activated(const QString &arg1)
+{
+    int value=ui->comboBox->currentIndex();
+
+            //qDebug()<<value;
+            if (value==1)
+            {
+                ui->tableView->setModel(tmpproduit.AfficherTriprix());
+            }
+            if (value==2)
+            {
+            ui->tableView->setModel(tmpproduit.AfficherTriquantite());
+            }
+            if (value==3)
+            {
+            ui->tableView->setModel(tmpproduit.AfficherTriID());
+            }
+
+}
+
+void MainWindow::on_lineEdit_6_textChanged(const QString &arg1)
+{
+    ui->label_7->setPixmap(ui->lineEdit_6->text());
+}

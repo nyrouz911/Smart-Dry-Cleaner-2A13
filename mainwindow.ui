@@ -30,7 +30,7 @@
         </rect>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="tab">
         <attribute name="title">
@@ -249,43 +249,78 @@
           <string>inserer image</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="pushButton_6">
+        <widget class="QComboBox" name="comboBox">
          <property name="geometry">
           <rect>
-           <x>470</x>
-           <y>400</y>
-           <width>111</width>
+           <x>400</x>
+           <y>370</y>
+           <width>71</width>
            <height>22</height>
           </rect>
          </property>
+         <item>
+          <property name="text">
+           <string>trier par</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>prix</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>quantite</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>ID</string>
+          </property>
+         </item>
+        </widget>
+        <widget class="QLabel" name="label_7">
+         <property name="geometry">
+          <rect>
+           <x>550</x>
+           <y>43</y>
+           <width>151</width>
+           <height>91</height>
+          </rect>
+         </property>
          <property name="text">
-          <string>trier par quantité</string>
+          <string>image</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="pushButton_7">
+       </widget>
+       <widget class="QWidget" name="tab_2">
+        <attribute name="title">
+         <string>Arduino</string>
+        </attribute>
+        <widget class="QLabel" name="label_8">
          <property name="geometry">
           <rect>
-           <x>590</x>
-           <y>400</y>
-           <width>80</width>
-           <height>22</height>
+           <x>350</x>
+           <y>130</y>
+           <width>141</width>
+           <height>91</height>
           </rect>
          </property>
          <property name="text">
-          <string>trier par ID </string>
+          <string>Etat</string>
          </property>
         </widget>
         <widget class="QPushButton" name="pushButton_4">
          <property name="geometry">
           <rect>
-           <x>380</x>
-           <y>400</y>
+           <x>150</x>
+           <y>170</y>
            <width>80</width>
            <height>22</height>
           </rect>
          </property>
          <property name="text">
-          <string>trier par prix</string>
+          <string>refresh</string>
          </property>
         </widget>
        </widget>

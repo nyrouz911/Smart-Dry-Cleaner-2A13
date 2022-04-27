@@ -215,7 +215,7 @@ QSqlQueryModel * produit::AfficherTriID()
 QSqlQueryModel * produit::AfficherTriprix()
 {
     QSqlQueryModel * model = new QSqlQueryModel();
-    model->setQuery("SELECT * FROM PRODUITS ORDER BY PRIX_UNIT ");
+    model->setQuery("SELECT * FROM PRODUITS ORDER BY PRIX_UNIT ASC");
     model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID_PROD"));
     model->setHeaderData(1, Qt::Horizontal, QObject::tr("FOURNISS"));
     model->setHeaderData(2, Qt::Horizontal, QObject::tr("QTE"));
