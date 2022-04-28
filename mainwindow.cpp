@@ -4,6 +4,8 @@
 #include "gestionmachine.h"
 #include "gestionclient.h"
 #include "gestionlivraison.h"
+//#include "gestionproduits.h"
+#include "gestionscommandes.h"
 //#include "employes.h"
 #include <QMessageBox>
 //#include "ui_gestionemployes.h"
@@ -49,9 +51,9 @@ void MainWindow::on_pushButton_clicked()
             ((username=="agentC")&&(password=="agentC"))
                 {
 
-                  gestionemployes e1;
-                  e1.setModal(true);
-                  e1.exec();
+                  gestionscommandes c1;
+                  c1.setModal(true);
+                  c1.exec();
 
 
                 }
@@ -68,15 +70,15 @@ void MainWindow::on_pushButton_clicked()
 
                 }
     //Achref
-    else if
+   /* else if
             ((username=="technicienP")&&(password=="produit"))
                 {
-                  gestionemployes e1;
-                  e1.setModal(true);
-                  e1.exec();
+                  GestionProduits p1;
+                  p1.setModal(true);
+                  p1.exec();
 
 
-                }
+                }*/
     //Brahym
 
     else if

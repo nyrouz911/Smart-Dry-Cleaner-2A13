@@ -325,7 +325,7 @@ border: 2px solid rgb(82, 124, 124)
     <widget class="QTableView" name="tab_livraison">
      <property name="geometry">
       <rect>
-       <x>420</x>
+       <x>410</x>
        <y>10</y>
        <width>501</width>
        <height>261</height>
@@ -818,6 +818,16 @@ border: 2px solid rgb(82, 124, 124)
      </property>
      <property name="text">
       <string>NUM LIVREUR</string>
+     </property>
+    </widget>
+    <widget class="QTextBrowser" name="textBrowser">
+     <property name="geometry">
+      <rect>
+       <x>460</x>
+       <y>60</y>
+       <width>256</width>
+       <height>192</height>
+      </rect>
      </property>
     </widget>
    </widget>

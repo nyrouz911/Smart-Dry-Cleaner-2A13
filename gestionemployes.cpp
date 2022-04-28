@@ -5,6 +5,9 @@
 #include "notification.h"
 #include "abonnement.h"
 #include "livraison.h"
+#include "qr_code.h"
+#include "qrcodegen.h"
+#include "commandes.h"
 #include <QMessageBox>
 #include "QMessageBox"
 #include <QApplication>
@@ -89,9 +92,22 @@ gestionemployes::gestionemployes(QWidget *parent) :
                                     //ui->lineEdit_2->setValidator(validator);
                                     ui->lineEdit_3->setValidator(new QIntValidator(0,99999999.,this));
                                     ui->lineEdit_4->setValidator(validator);
-                                    ui->lineEdit->setValidator(new QIntValidator(0,999999.,this));
+                                    //ui->lineEdit->setValidator(new QIntValidator(0,999999.,this));
                                     //ui->tab_livraison->setModel(l.afficher());
                                     // ui->textBrowser->hide();
+
+
+             //CS NAYROUZ
+                                    ui->id_mach_mod->setValidator( new QIntValidator(0, 999999, this));
+                                    ui->num_fab->setValidator( new QIntValidator(0, 99999999, this));
+                                    QRegularExpression rx80("\\b[A-Z._%+-]+@[A-Z.-]+\\.[A-Z]\\b",
+                                    QRegularExpression::CaseInsensitiveOption);
+                                    ui->type_mach->setValidator(new QRegularExpressionValidator(rx80, this));
+                                    QRegularExpression rx81("\\b[A-Z._%+-]+@[A-Z.-]+\\.[A-Z]\\b",
+                                    QRegularExpression::CaseInsensitiveOption);
+                                    ui->fab->setValidator(new QRegularExpressionValidator(rx81, this));
+                                    QRegularExpression rx83("\\b[A-Z._%+-]+@[A-Z.-]+\\.[A-Z]\\b",
+                                    QRegularExpression::CaseInsensitiveOption);
 
 
 
@@ -766,4 +782,179 @@ void gestionemployes::on_pushButton_retourb_clicked()
      ui->stackedWidget->setCurrentIndex(0);
 }
 
-// BOUTONS NAYROUZ (machine
+// BOUTONS NAYROUZ (machine)
+
+void gestionemployes::on_ajouter_2_clicked()
+{
+
+    int id_mach=ui->id_mach_mod->text().toInt();
+    QString type=ui->type_mach->text();
+    int etat_mach=ui->etat_mach->currentIndex();
+    QString fab=ui->fab->text();
+    QString num_fab=ui->num_fab->text();
+
+Machine_f m(id_mach,type,etat_mach,fab,num_fab);
+
+   bool test=m.ajoutermach();
+
+    if(test)
+    {
+
+        //refresh
+        ui->tableViewN->setModel(Machtmp.affichermach());
+
+        QMessageBox::information(nullptr, QObject::tr("OK"),
+                                 QObject::tr("Ajout effectué\n"
+                                             "Click Cancel to exit."), QMessageBox::Cancel);
+
+    }
+    else
+        QMessageBox::critical(nullptr,QObject::tr("NOT OK"),
+                              QObject::tr("Ajout non effectué.\n"
+                                          "Click Cancel to exit."), QMessageBox::Cancel);
+}
+
+void gestionemployes::on_modifier_2_clicked()
+{
+    int id_mach=ui->id_mach_mod->text().toInt();
+    QString type=ui->type_mach->text();
+    int etat_mach=ui->etat_mach->currentIndex();
+    QString fab=ui->fab->text();
+    QString num_fab=ui->num_fab->text();
+
+
+    Machine_f m(id_mach,type,etat_mach,fab,num_fab);
+    bool test = m.modifiermach(id_mach);
+
+    //refresh
+    ui->tableView->setModel(Machtmp.affichermach());
+
+    if(test){
+        QMessageBox::information(nullptr, QObject::tr("update status"),QObject::tr("Machine updated.\nClick Cancel to exit."), QMessageBox::Cancel,QMessageBox::NoIcon);
+    }
+    else {
+        QMessageBox::critical(nullptr, QObject::tr("update status"),QObject::tr("Machine not updated.\nClick Cancel to exit."), QMessageBox::Cancel);
+    }
+}
+
+void gestionemployes::on_supprimer_2_clicked()
+{
+    int id_mach=ui->id_mach_sup->text().toInt();
+    bool test=Machtmp.supprimermach(id_mach);
+
+    //refresh
+    ui->tableView->setModel(Machtmp.affichermach());
+    if (test)
+    {
+        QMessageBox::information(nullptr,QObject::tr("OK"),
+                                 QObject::tr("Suppression effectuée.\n"
+                                             "Click Cancel to exit."), QMessageBox::Cancel);
+    }
+}
+void gestionemployes::on_chercher_textChanged(const QString &arg1)
+{
+    {
+        QSqlQueryModel *model= new QSqlQueryModel();
+        QSqlQuery   *query= new QSqlQuery();
+        query->prepare("SELECT * FROM MACHINES WHERE ID_MACH  LIKE'"+arg1+"%' or TYPE  LIKE'"+arg1+"%' or ETAT_MACH  LIKE'"+arg1+"%' or FAB LIKE'"+arg1+"%' or NUM_FAB  LIKE'"+arg1+"%' or ID_PROD  LIKE'"+arg1+"%'  ");
+        query->exec();
+         if (query->next()) {
+         model->setQuery(*query);
+         ui->tableView->setModel(model);
+         }
+         else {
+             QMessageBox::critical(nullptr, QObject::tr("SEARCH"),
+                             QObject::tr("NO MATCH FOUND !!\n"
+                                         "Click Cancel to exit."), QMessageBox::Cancel);
+             ui->chercher->clear();}
+    }
+}
+
+void gestionemployes::on_trifab_clicked()
+{
+
+        ui->tableView->setModel(Machtmp.tri_fab());
+
+}
+
+void gestionemployes::on_tritype_clicked()
+{
+    ui->tableView->setModel(Machtmp.tri_type());
+}
+
+void gestionemployes::on_trietat_clicked()
+{
+    ui->tableView->setModel(Machtmp.tri_etat());
+}
+
+void gestionemployes::on_pushButton_12_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(4);
+}
+
+void gestionemployes::on_retourbrahym_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(0);
+}
+
+//boutons miguel (commandes)
+
+
+
+
+void gestionemployes::on_pushButton_28_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(6);
+}
+
+void gestionemployes::on_pushButton_29_clicked()
+{
+     ui->stackedWidget->setCurrentIndex(0);
+}
+
+void gestionemployes::on_pushButton_27_clicked()
+{
+    /*QSqlQuery query;
+    QString nouveauNbPoints,idClient;
+    int nbPoints;
+
+    nouveauNbPoints=ui->label_38->text();
+    idClient=ui->label_11->text();
+    nbPoints=ui->label_36->text().toInt();
+
+    QByteArray toArduino = QByteArray::number(nbPoints);
+
+   // Mise a jour du nombre de points
+    query.prepare("update abonnement set nb_pntfid='"+nouveauNbPoints+"' where id_client='"+idClient+"'");
+    if(query.exec())
+    {
+        if(A.write_to_arduino(toArduino)!=-1)
+        {
+            QMessageBox::information(nullptr,QObject::tr("OK"),
+                                     QObject::tr("POINTS ATTRIBUE AVEC SUCCES\n"
+                                                 "Click Cancel to exit."), QMessageBox::Cancel);
+        }
+    }*/
+}
+
+void gestionemployes::on_Boutton_Afiche_Commades_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(6);
+}
+
+
+void gestionemployes::on_pushButton_18_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(3);
+}
+
+
+void gestionemployes::on_pushButton_13_clicked()
+{
+   ui->stackedWidget->setCurrentIndex(6);
+}
+
+/*void gestionemployes::on_pushButton_80_clicked()
+{
+     ui->stackedWidget->setCurrentIndex(5);
+}*/

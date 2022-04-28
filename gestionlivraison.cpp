@@ -29,7 +29,7 @@ gestionlivraison::gestionlivraison(QWidget *parent) :
     ui->lineEdit_4->setValidator(validator);
     ui->lineEdit->setValidator(new QIntValidator(0,999999.,this));
     ui->tab_livraison->setModel(l.afficher());
-    // ui->textBrowser->hide();
+    ui->textBrowser->hide();
 }
 
 gestionlivraison::~gestionlivraison()
@@ -164,10 +164,10 @@ void gestionlivraison::on_triernum_clicked()
     ui->tab_livraison->setModel(l.trier_numlivreur());
 }
 
-/*void gestionlivraison::on_generer_clicked()
+void gestionlivraison::on_generer_clicked()
 {
     l.exporterpdf(ui->textBrowser);
-}*/
+}
 
 void gestionlivraison::on_Francais_clicked()
 {
@@ -263,6 +263,7 @@ void gestionlivraison::on_Excel_clicked()
         QDate date = QDate::currentDate();
         return date.toString("dd.MM.yyyy");
 }*/
+
 
 
 

@@ -2,6 +2,11 @@ QT       += core gui sql
 QT       +=  printsupport
 QT       += core gui
 QT += core gui network
+QT       += serialport
+QT       += core gui sql
+QT       += core gui sql printsupport network serialport
+
+
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -21,12 +26,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     abonnement.cpp \
     client.cpp \
+    commandes.cpp \
     connection.cpp \
     employes.cpp \
     gestionclient.cpp \
     gestionemployes.cpp \
     gestionlivraison.cpp \
     gestionmachine.cpp \
+    gestionscommandes.cpp \
     intervention.cpp \
     interventions.cpp \
     livraison.cpp \
@@ -36,17 +43,21 @@ SOURCES += \
     mainwindow.cpp \
     message.cpp \
     notification.cpp \
+    qr_code.cpp \
+    qrcodegen.cpp \
     smtp.cpp
 
 HEADERS += \
     abonnement.h \
     client.h \
+    commandes.h \
     connection.h \
     employes.h \
     gestionclient.h \
     gestionemployes.h \
     gestionlivraison.h \
     gestionmachine.h \
+    gestionscommandes.h \
     intervention.h \
     interventions.h \
     livraison.h \
@@ -55,6 +66,8 @@ HEADERS += \
     mainwindow.h \
     message.h \
     notification.h \
+    qr_code.h \
+    qrcodegen.h \
     smtp.h
 
 FORMS += \
@@ -62,6 +75,7 @@ FORMS += \
     gestionemployes.ui \
     gestionlivraison.ui \
     gestionmachine.ui \
+    gestionscommandes.ui \
     interventions.ui \
     mail.ui \
     mainwindow.ui
