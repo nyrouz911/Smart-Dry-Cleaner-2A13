@@ -467,7 +467,7 @@ void gestionscommandes::on_checkBox_7_stateChanged(int arg1)//l'etat de la case 
         ui->tableView->setModel(Etmp.afficherCommande());
 }
 
-void gestionscommandes::on_pushButton_7_clicked()//click sur le boutton imprimer Recu
+void gestionscommandes::on_pushButton_7_clicked()//click sur le boutton imprimer Recu dans un fichier texte
 {
     //recuperer l'identifiant de la commande
     QModelIndex index= ui->tableView->currentIndex();
