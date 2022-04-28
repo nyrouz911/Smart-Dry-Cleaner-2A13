@@ -21,6 +21,7 @@
  *   Software.
  */
 
+/*Fichier pour gerer la generation de code QR*/
 #include <algorithm>
 #include <cassert>
 #include <climits>
